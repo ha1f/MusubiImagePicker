@@ -1,0 +1,10 @@
+framework module MusubiImagePicker {
+  umbrella header "MusubiImagePicker.h"
+
+  export *
+  module * { export * }
+}
+
+module MusubiImagePicker.Swift {
+    header "MusubiImagePicker-Swift.h"
+}
