@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Q4y-Ku-OQN">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Asset View Controller-->
+        <scene sceneID="bu8-E5-AG6">
+            <objects>
+                <viewController id="Q4y-Ku-OQN" customClass="AssetViewController" customModule="SamplePhotosApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="avy-i4-98V"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q7w-mX-dJY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QS7-aO-HHV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G0H-dS-NYh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofH-UU-rOE" customClass="PHLivePhotoView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="G0H-dS-NYh" secondAttribute="bottom" id="EBO-Jw-DWg"/>
+                            <constraint firstItem="G0H-dS-NYh" firstAttribute="leading" secondItem="QS7-aO-HHV" secondAttribute="leading" id="SQm-L1-OLB"/>
+                            <constraint firstItem="G0H-dS-NYh" firstAttribute="top" secondItem="QS7-aO-HHV" secondAttribute="top" id="bjZ-CL-aRn"/>
+                            <constraint firstItem="Q7w-mX-dJY" firstAttribute="top" secondItem="ofH-UU-rOE" secondAttribute="bottom" id="gSi-Jk-0Uh"/>
+                            <constraint firstItem="ofH-UU-rOE" firstAttribute="leading" secondItem="QS7-aO-HHV" secondAttribute="leading" id="ghq-TE-vYX"/>
+                            <constraint firstAttribute="trailing" secondItem="ofH-UU-rOE" secondAttribute="trailing" id="mZ7-I4-rB7"/>
+                            <constraint firstAttribute="trailing" secondItem="G0H-dS-NYh" secondAttribute="trailing" id="mvG-36-BxV"/>
+                            <constraint firstItem="ofH-UU-rOE" firstAttribute="top" secondItem="avy-i4-98V" secondAttribute="bottom" id="ydA-en-xeN"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="9TU-R7-B5W">
+                        <nil key="title"/>
+                        <progressView key="titleView" hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" id="qfn-hS-RWZ" userLabel="Progress View">
+                            <rect key="frame" x="8" y="21" width="315" height="3"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </progressView>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="QMG-MP-PiU">
+                            <connections>
+                                <action selector="editAsset:" destination="Q4y-Ku-OQN" id="TIb-Vf-Xhp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="editButton" destination="QMG-MP-PiU" id="ox2-Y5-LCf"/>
+                        <outlet property="favoriteButton" destination="CDv-U5-I2s" id="BDg-Ml-EQt"/>
+                        <outlet property="imageView" destination="G0H-dS-NYh" id="UbA-Gm-yEZ"/>
+                        <outlet property="livePhotoView" destination="ofH-UU-rOE" id="Y6M-O2-ALQ"/>
+                        <outlet property="playButton" destination="8y0-Go-kn7" id="1rd-XY-DMz"/>
+                        <outlet property="progressView" destination="qfn-hS-RWZ" id="77I-Mb-5rM"/>
+                        <outlet property="space" destination="FbF-A9-Ixl" id="Zsu-Bg-bZp"/>
+                        <outlet property="trashButton" destination="Y0K-UE-MCp" id="EfO-GP-VQH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9wA-9V-Ox2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="play" id="8y0-Go-kn7">
+                    <connections>
+                        <action selector="play:" destination="Q4y-Ku-OQN" id="dqU-Kz-obT"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem style="plain" systemItem="flexibleSpace" id="FbF-A9-Ixl"/>
+                <barButtonItem systemItem="trash" id="Y0K-UE-MCp">
+                    <connections>
+                        <action selector="removeAsset:" destination="Q4y-Ku-OQN" id="qiC-oE-ZfN"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem title="♡" id="CDv-U5-I2s">
+                    <connections>
+                        <action selector="toggleFavorite:" destination="Q4y-Ku-OQN" id="ekZ-uz-vzz"/>
+                    </connections>
+                </barButtonItem>
+            </objects>
+            <point key="canvasLocation" x="1509" y="128"/>
+        </scene>
+    </scenes>
+</document>
