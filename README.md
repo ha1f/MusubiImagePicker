@@ -2,7 +2,13 @@
 ## 概要
 
 - フォトライブラリから写真を選択する
-- 複数選択可能
+- 複数選択可能（上限の設定も可能）
+- 少しながらアニメーション
+- プレビュー機能（長押しでプレビュー）
+
+![select](https://raw.githubusercontent.com/ha1fha1f/MusubiImagePicker/master/screenshots/select.png)
+
+![anim](https://raw.githubusercontent.com/ha1fha1f/MusubiImagePicker/master/screenshots/anim.gif)
 
 ## GettingStarted
 
@@ -13,20 +19,21 @@ github "ha1fha1f/MusubiImagePicker"
 ```
 
 をCartfileに追記してビルド
+その他、Copyなどの設定は通常のCarthageと同様
 
 #### Info.plist
 
 ```
-NSPhotoLibraryUsageDescription 
+NSPhotoLibraryUsageDescription
 ```
 
-というキーに、画像を使う理由を書く
+というキーに、画像を使う理由を書く（iOS 10.0以降では必須）
 
 #### ViewController(example)
 
 1. MusubiImagePicker.instanciate()でインスタンス生成（イニシャライザを使わない）
-1. delegateを設定
-1. Delegateメソッドを実装する
+1. delegateを設定（MusubiImagePickerDelegateを実装、）
+1. delegateメソッドを実装する
 
 ```swift
 import UIKit
@@ -36,17 +43,35 @@ import Photos
 class ViewController: UIViewController, MusubiImagePickerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        // .instanciate()によりインスタンス化します（イニシャライザは使わない）
         let picker = MusubiImagePicker.instanciate()
+
+        // .musubiImagePickerDelegateを設定します（.delegateはnavigationControllerに向いています）
         picker.musubiImagePickerDelegate = self
+
+        // すでにAssetを選択している場合は、ここでlocalIdentifierを渡すことができます（任意）
+        picker.previouslySelectedAssetLocalIdentifiers = ["ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED/L0/001", "495F9CF5-F638-4694-9C48-B73451DA9C7A/L0/001"]
+
+        // 選択可能枚数の上限を設定したい場合は、ここで設定できます（任意）
+        picker.maxSelectionsCount = 4
+
+        // 基本的にはモーダルとして表示します
         self.present(picker, animated: true, completion: nil)
     }
+
+    // Doneが押されたときに呼ばれます（基本的にはここで閉じます）
     func didFinishPickingAssets(picker: MusubiImagePicker, selectedAssets: [PHAsset], assetCollection: PHAssetCollection!) {
-        print("done")
         picker.dismiss(animated: true, completion: nil)
-        print(selectedAssets.count)
+        print(selectedAssets.map({ $0.localIdentifier }))
+    }
+
+    // Cancelが押されたときに呼ばれます（基本的にはここで閉じます）
+    func didCancelPickingAssets(picker: MusubiImagePicker) {
+        picker.dismiss(animated: true, completion: nil)
+        print("canceled")
     }
 }
-
 ```
 
 ## Build Requirements
@@ -62,7 +87,6 @@ iOS 10.0, or later
 - headerCells、を作って、カメラ等を追加できるようにする
 - 現状ほぼ改変できないので改変可能にしたい
 - iOS 9.xへの対応
-- 選択可能な画像の枚数を制限する
 
 
 ## ライセンス
