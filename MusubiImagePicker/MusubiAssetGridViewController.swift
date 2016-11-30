@@ -23,7 +23,6 @@ class MusubiAssetGridViewController: AssetGridViewController {
         return self.navigationController! as! MusubiImagePicker
     }
     
-    // すでに選択されているAssetを前の画面から渡せる
     var config: MusubiImagePickerConfiguration {
         set {
             musubiImagePicker.config = newValue
@@ -31,10 +30,6 @@ class MusubiAssetGridViewController: AssetGridViewController {
         get {
             return musubiImagePicker.config
         }
-    }
-    
-    var selectedAssets: [PHAsset] {
-        return fetchResult.objects(at: IndexSet(self.collectionView!.indexPathsForSelectedItems!.map { $0.item }))
     }
     
     override func viewDidLoad() {
@@ -86,6 +81,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
     }
     
     func onFinishSelectingAssets() {
+        let selectedAssets = fetchResult.objects(at: IndexSet(self.collectionView!.indexPathsForSelectedItems!.map { $0.item }))
         delegate?.didFinishPickingAssets(picker: musubiImagePicker, selectedAssets: selectedAssets, assetCollection: assetCollection)
     }
     

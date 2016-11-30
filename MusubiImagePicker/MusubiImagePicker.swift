@@ -10,8 +10,11 @@ import UIKit
 import Photos
 
 public struct MusubiImagePickerConfiguration {
+    // すでに選択されているAssetのlocalIdentifierを渡しておける
     public var previouslySelectedAssetLocalIdentifiers = [String]()
+    // 選択可能枚数（初期値は上限なし）
     public var maxSelectionsCount = Int.max
+    // delegate
     public weak var delegate: MusubiImagePickerDelegate?
 }
 
