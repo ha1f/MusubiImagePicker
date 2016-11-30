@@ -11,6 +11,7 @@ import UIKit
 class MusubiGridViewCell: GridViewCell {
     
     private var checkBoxView: CheckBoxView!
+    private var whiteLayer: CALayer?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +21,22 @@ class MusubiGridViewCell: GridViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupCheckBox()
+    }
+    
+    override var isUserInteractionEnabled: Bool {
+        didSet {
+            if isUserInteractionEnabled {
+                whiteLayer?.removeFromSuperlayer()
+                whiteLayer = nil
+            } else {
+                whiteLayer?.removeFromSuperlayer()
+                let layer = CALayer()
+                layer.frame = self.bounds
+                layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.7).cgColor
+                self.layer.addSublayer(layer)
+                whiteLayer = layer
+            }
+        }
     }
     
     override var isSelected: Bool {
@@ -61,4 +78,12 @@ class MusubiGridViewCell: GridViewCell {
         
         self.addSubview(checkBoxView)
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        whiteLayer?.removeFromSuperlayer()
+        whiteLayer = nil
+        isUserInteractionEnabled = true
+    }
+    
 }

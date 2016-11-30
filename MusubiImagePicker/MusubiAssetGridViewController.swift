@@ -84,9 +84,13 @@ class MusubiAssetGridViewController: AssetGridViewController {
         delegate?.didFinishPickingAssets(picker: musubiImagePicker, selectedAssets: selectedAssets, assetCollection: assetCollection)
     }
     
+    private func isCollectionViewCanSelect(_ collectionView: UICollectionView) -> Bool {
+        return collectionView.indexPathsForSelectedItems?.count ?? 0 < maxSelectionsCount
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.didSelectAssetAt?(indexPath: indexPath)
-        if collectionView.indexPathsForSelectedItems?.count ?? 0 >= maxSelectionsCount {
+        if !isCollectionViewCanSelect(collectionView) {
             collectionView.visibleCells
                 .filter{ cell in !cell.isSelected }
                 .forEach { cell in
@@ -100,12 +104,17 @@ class MusubiAssetGridViewController: AssetGridViewController {
             previouslySelectedAssetLocalIdentifiers.remove(at: index)
         }
         
-        if collectionView.indexPathsForSelectedItems?.count ?? 0 < maxSelectionsCount {
+        if isCollectionViewCanSelect(collectionView) {
             collectionView.visibleCells
-                .filter{ cell in !cell.isSelected }
                 .forEach { cell in
                     cell.isUserInteractionEnabled = true
             }
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if !isCollectionViewCanSelect(collectionView) && !cell.isSelected {
+            cell.isUserInteractionEnabled = false
         }
     }
     
