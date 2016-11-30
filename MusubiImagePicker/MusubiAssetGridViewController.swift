@@ -22,6 +22,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
         return self.navigationController! as! MusubiImagePicker
     }
     
+    // すでに選択されているAssetを前の画面から渡せる
     var previouslySelectedAssetLocalIdentifiers: [String] {
         set {
             musubiImagePicker.previouslySelectedAssetLocalIdentifiers = newValue
@@ -29,6 +30,11 @@ class MusubiAssetGridViewController: AssetGridViewController {
         get {
             return musubiImagePicker.previouslySelectedAssetLocalIdentifiers
         }
+    }
+    
+    // 選択できる最大
+    var maxSelectionsCount: Int {
+        return musubiImagePicker.maxSelectionsCount
     }
     
     var selectedAssets: [PHAsset] {
@@ -80,11 +86,26 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.didSelectAssetAt?(indexPath: indexPath)
+        if collectionView.indexPathsForSelectedItems?.count ?? 0 >= maxSelectionsCount {
+            collectionView.visibleCells
+                .filter{ cell in !cell.isSelected }
+                .forEach { cell in
+                    cell.isUserInteractionEnabled = false
+                }
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let index = previouslySelectedAssetLocalIdentifiers.index(of: fetchResult.object(at: indexPath.item).localIdentifier) {
             previouslySelectedAssetLocalIdentifiers.remove(at: index)
+        }
+        
+        if collectionView.indexPathsForSelectedItems?.count ?? 0 < maxSelectionsCount {
+            collectionView.visibleCells
+                .filter{ cell in !cell.isSelected }
+                .forEach { cell in
+                    cell.isUserInteractionEnabled = true
+            }
         }
     }
     

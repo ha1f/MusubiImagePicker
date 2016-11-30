@@ -16,6 +16,7 @@ import Photos
 
 public class MusubiImagePicker: UINavigationController {
     public var previouslySelectedAssetLocalIdentifiers = [String]()
+    public var maxSelectionsCount = Int.max
     public static func instanciate() -> MusubiImagePicker {
         return UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as! MusubiImagePicker
     }

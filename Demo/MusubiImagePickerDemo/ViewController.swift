@@ -23,6 +23,7 @@ class ViewController: UIViewController, MusubiImagePickerDelegate {
         let picker = MusubiImagePicker.instanciate()
         picker.musubiImagePickerDelegate = self
         picker.previouslySelectedAssetLocalIdentifiers = ["ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED/L0/001", "495F9CF5-F638-4694-9C48-B73451DA9C7A/L0/001"]
+        picker.maxSelectionsCount = 4
         self.present(picker, animated: true, completion: nil)
     }
     
