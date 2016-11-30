@@ -15,7 +15,20 @@ class MusubiAssetGridViewController: AssetGridViewController {
     @IBOutlet var doneButtonItem: UIBarButtonItem!
     
     weak var delegate: MusubiImagePickerDelegate? {
-        return (self.navigationController as? MusubiImagePicker)?.musubiImagePickerDelegate
+        return musubiImagePicker.musubiImagePickerDelegate
+    }
+    
+    var musubiImagePicker: MusubiImagePicker {
+        return self.navigationController! as! MusubiImagePicker
+    }
+    
+    var previouslySelectedAssetLocalIdentifiers: [String] {
+        set {
+            musubiImagePicker.previouslySelectedAssetLocalIdentifiers = newValue
+        }
+        get {
+            return musubiImagePicker.previouslySelectedAssetLocalIdentifiers
+        }
     }
     
     var selectedAssets: [PHAsset] {
@@ -25,6 +38,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 長押ししたら画像を開く
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.onCellPressedLong(_:)))
         collectionView?.addGestureRecognizer(gestureRecognizer)
         
@@ -37,10 +51,6 @@ class MusubiAssetGridViewController: AssetGridViewController {
         navigationItem.rightBarButtonItem = doneButtonItem
         doneButtonItem.target = self
         doneButtonItem.action = #selector(self.onFinishSelectingAssets)
-    }
-    
-    func onFinishSelectingAssets() {
-        delegate?.didFinishPickingAssets(picker: self.navigationController! as! MusubiImagePicker, selectedAssets: selectedAssets, assetCollection: assetCollection)
     }
     
     // Asset詳細への遷移でindexPathを渡すようにしたので変更
@@ -62,6 +72,29 @@ class MusubiAssetGridViewController: AssetGridViewController {
             let indexPath = self.collectionView!.indexPathForItem(at: point)!
             self.performSegue(withIdentifier: "showAsset", sender: indexPath)
         }
+    }
+    
+    func onFinishSelectingAssets() {
+        delegate?.didFinishPickingAssets(picker: musubiImagePicker, selectedAssets: selectedAssets, assetCollection: assetCollection)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didSelectAssetAt?(indexPath: indexPath)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let index = previouslySelectedAssetLocalIdentifiers.index(of: fetchResult.object(at: indexPath.item).localIdentifier) {
+            previouslySelectedAssetLocalIdentifiers.remove(at: index)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
+        if previouslySelectedAssetLocalIdentifiers.contains(fetchResult.object(at: indexPath.item).localIdentifier) {
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
+            cell.isSelected = true
+        }
+        return cell
     }
     
     private func addAsset(image: UIImage) {
@@ -87,9 +120,7 @@ extension MusubiAssetGridViewController: UICollectionViewDelegateFlowLayout {
     // セルの間隔
     static let CELLS_MARGIN: CGFloat = 1
     // 周りの余白
-    private var edgeInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
+    static let edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     fileprivate var cellSize: CGSize {
         let space = type(of: self).CELLS_MARGIN
@@ -97,9 +128,9 @@ extension MusubiAssetGridViewController: UICollectionViewDelegateFlowLayout {
         let contentWidth: CGFloat
         if let direction = (collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection, direction == .horizontal {
             // 横スクロールなら縦並びのセル数として計算
-            contentWidth = collectionView!.bounds.height - edgeInsets.top - edgeInsets.bottom
+            contentWidth = collectionView!.bounds.height - MusubiAssetGridViewController.edgeInsets.top - MusubiAssetGridViewController.edgeInsets.bottom
         } else {
-            contentWidth = collectionView!.bounds.width - edgeInsets.right - edgeInsets.left
+            contentWidth = collectionView!.bounds.width - MusubiAssetGridViewController.edgeInsets.right - MusubiAssetGridViewController.edgeInsets.left
         }
         
         let cellLength = (contentWidth - space * (type(of: self).HORIZONTAL_CELLS_COUNT-1)) / type(of: self).HORIZONTAL_CELLS_COUNT
@@ -112,7 +143,7 @@ extension MusubiAssetGridViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return edgeInsets
+        return MusubiAssetGridViewController.edgeInsets
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

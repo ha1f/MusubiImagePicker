@@ -22,13 +22,14 @@ class ViewController: UIViewController, MusubiImagePickerDelegate {
         super.viewDidAppear(animated)
         let picker = MusubiImagePicker.instanciate()
         picker.musubiImagePickerDelegate = self
+        picker.previouslySelectedAssetLocalIdentifiers = ["ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED/L0/001", "495F9CF5-F638-4694-9C48-B73451DA9C7A/L0/001"]
         self.present(picker, animated: true, completion: nil)
     }
     
     func didFinishPickingAssets(picker: MusubiImagePicker, selectedAssets: [PHAsset], assetCollection: PHAssetCollection!) {
         print("done")
         picker.dismiss(animated: true, completion: nil)
-        print(selectedAssets.count)
+        print(selectedAssets.map({ $0.localIdentifier }))
     }
 
     override func didReceiveMemoryWarning() {

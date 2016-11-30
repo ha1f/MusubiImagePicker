@@ -9,11 +9,13 @@
 import UIKit
 import Photos
 
-public protocol MusubiImagePickerDelegate: class {
+@objc public protocol MusubiImagePickerDelegate: class {
     func didFinishPickingAssets(picker: MusubiImagePicker, selectedAssets: [PHAsset], assetCollection: PHAssetCollection!)
+    @objc optional func didSelectAssetAt(indexPath: IndexPath)
 }
 
 public class MusubiImagePicker: UINavigationController {
+    public var previouslySelectedAssetLocalIdentifiers = [String]()
     public static func instanciate() -> MusubiImagePicker {
         return UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as! MusubiImagePicker
     }
