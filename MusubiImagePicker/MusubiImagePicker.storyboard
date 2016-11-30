@@ -86,6 +86,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cancelButtonItem" destination="TG0-Mm-nc5" id="3ui-Bu-AWM"/>
                         <outlet property="collectionView" destination="EDg-WQ-Ho3" id="xFe-kx-KyP"/>
                         <outlet property="doneButtonItem" destination="4hY-xv-fHe" id="zUQ-Ff-Aai"/>
                         <segue destination="eNe-1y-5BJ" kind="showDetail" identifier="showAsset" action="showViewController:sender:" id="ksh-2A-9EG"/>
@@ -93,6 +94,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KR2-l5-5kg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem style="plain" systemItem="done" id="4hY-xv-fHe"/>
+                <barButtonItem style="plain" systemItem="cancel" id="TG0-Mm-nc5"/>
             </objects>
             <point key="canvasLocation" x="1010" y="128"/>
         </scene>

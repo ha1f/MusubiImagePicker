@@ -28,9 +28,13 @@ class ViewController: UIViewController, MusubiImagePickerDelegate {
     }
     
     func didFinishPickingAssets(picker: MusubiImagePicker, selectedAssets: [PHAsset], assetCollection: PHAssetCollection!) {
-        print("done")
         picker.dismiss(animated: true, completion: nil)
         print(selectedAssets.map({ $0.localIdentifier }))
+    }
+    
+    func didCancelPickingAssets(picker: MusubiImagePicker) {
+        picker.dismiss(animated: true, completion: nil)
+        print("canceled")
     }
 
     override func didReceiveMemoryWarning() {

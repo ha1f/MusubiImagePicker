@@ -13,6 +13,7 @@ import PhotosUI
 
 class MusubiAssetGridViewController: AssetGridViewController {
     @IBOutlet var doneButtonItem: UIBarButtonItem!
+    @IBOutlet var cancelButtonItem: UIBarButtonItem!
     
     weak var delegate: MusubiImagePickerDelegate? {
         return musubiImagePicker.musubiImagePickerDelegate
@@ -57,6 +58,11 @@ class MusubiAssetGridViewController: AssetGridViewController {
         navigationItem.rightBarButtonItem = doneButtonItem
         doneButtonItem.target = self
         doneButtonItem.action = #selector(self.onFinishSelectingAssets)
+        
+        // キャンセルボタン
+        navigationItem.leftBarButtonItem = cancelButtonItem
+        cancelButtonItem.target = self
+        cancelButtonItem.action = #selector(self.onCancelPickingAssets)
     }
     
     // Asset詳細への遷移でindexPathを渡すようにしたので変更
@@ -78,6 +84,10 @@ class MusubiAssetGridViewController: AssetGridViewController {
             let indexPath = self.collectionView!.indexPathForItem(at: point)!
             self.performSegue(withIdentifier: "showAsset", sender: indexPath)
         }
+    }
+    
+    func onCancelPickingAssets() {
+        delegate?.didCancelPickingAssets?(picker: musubiImagePicker)
     }
     
     func onFinishSelectingAssets() {
