@@ -57,7 +57,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     // Asset詳細への遷移でindexPathを渡すようにしたので変更
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? AssetViewController else {
+        guard let destination = segue.destination as? MusubiAssetViewController else {
             fatalError("unexpected view controller for segue")
         }
         let indexPath = sender as! IndexPath

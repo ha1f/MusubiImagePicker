@@ -16,6 +16,10 @@ public struct MusubiImagePickerConfiguration {
     public var maxSelectionsCount = Int.max
     // delegate
     public weak var delegate: MusubiImagePickerDelegate?
+    
+    public var isEditingEnabled = false
+    public var isDeletingEnabled = false
+    public var isFavoriteEnabled = false
 }
 
 @objc public protocol MusubiImagePickerDelegate: class {

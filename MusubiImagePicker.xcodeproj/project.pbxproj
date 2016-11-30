@@ -17,6 +17,7 @@
 		848783EC1DEDDF9300BB7787 /* AssetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848783EB1DEDDF9300BB7787 /* AssetViewController.storyboard */; };
 		848783EE1DEDDF9C00BB7787 /* MusubiImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848783ED1DEDDF9C00BB7787 /* MusubiImagePicker.storyboard */; };
 		8487842A1DEDE22F00BB7787 /* MusubiImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848784291DEDE22F00BB7787 /* MusubiImagePicker.swift */; };
+		84B5EE091DEF379800FFEE1B /* MusubiAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B5EE081DEF379800FFEE1B /* MusubiAssetViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		848783EB1DEDDF9300BB7787 /* AssetViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AssetViewController.storyboard; sourceTree = "<group>"; };
 		848783ED1DEDDF9C00BB7787 /* MusubiImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusubiImagePicker.storyboard; sourceTree = "<group>"; };
 		848784291DEDE22F00BB7787 /* MusubiImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusubiImagePicker.swift; sourceTree = "<group>"; };
+		84B5EE081DEF379800FFEE1B /* MusubiAssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusubiAssetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				848783E61DEDDF4A00BB7787 /* MusubiAssetGridViewController.swift */,
 				848783E71DEDDF4A00BB7787 /* MusubiGridViewCell.swift */,
 				848784291DEDE22F00BB7787 /* MusubiImagePicker.swift */,
+				84B5EE081DEF379800FFEE1B /* MusubiAssetViewController.swift */,
 				848783DE1DEDDEDC00BB7787 /* ExampleappusingPhotosframework */,
 				848783D51DEDDE7000BB7787 /* MusubiImagePicker.h */,
 				848783D61DEDDE7000BB7787 /* Info.plist */,
@@ -175,6 +178,7 @@
 				848783E91DEDDF4A00BB7787 /* MusubiAssetGridViewController.swift in Sources */,
 				848783E81DEDDF4A00BB7787 /* CheckBoxView.swift in Sources */,
 				8487842A1DEDE22F00BB7787 /* MusubiImagePicker.swift in Sources */,
+				84B5EE091DEF379800FFEE1B /* MusubiAssetViewController.swift in Sources */,
 				848783EA1DEDDF4A00BB7787 /* MusubiGridViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

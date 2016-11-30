@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Asset View Controller-->
+        <!--Musubi Asset View Controller-->
         <scene sceneID="bu8-E5-AG6">
             <objects>
-                <viewController id="Q4y-Ku-OQN" customClass="AssetViewController" customModule="SamplePhotosApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Q4y-Ku-OQN" customClass="MusubiAssetViewController" customModule="MusubiImagePicker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="avy-i4-98V"/>
                         <viewControllerLayoutGuide type="bottom" id="Q7w-mX-dJY"/>
