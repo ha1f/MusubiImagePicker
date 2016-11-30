@@ -110,6 +110,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
                     cell.isUserInteractionEnabled = true
             }
         }
+        delegate?.didDeselectAssetAt?(indexPath: indexPath)
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

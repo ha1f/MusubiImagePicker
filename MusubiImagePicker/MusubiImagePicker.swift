@@ -12,6 +12,7 @@ import Photos
 @objc public protocol MusubiImagePickerDelegate: class {
     func didFinishPickingAssets(picker: MusubiImagePicker, selectedAssets: [PHAsset], assetCollection: PHAssetCollection!)
     @objc optional func didSelectAssetAt(indexPath: IndexPath)
+    @objc optional func didDeselectAssetAt(indexPath: IndexPath)
 }
 
 public class MusubiImagePicker: UINavigationController {
