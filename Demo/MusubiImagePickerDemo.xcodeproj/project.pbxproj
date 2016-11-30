@@ -12,6 +12,7 @@
 		848784161DEDE0A000BB7787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848784141DEDE0A000BB7787 /* Main.storyboard */; };
 		848784181DEDE0A000BB7787 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848784171DEDE0A000BB7787 /* Assets.xcassets */; };
 		8487841B1DEDE0A000BB7787 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848784191DEDE0A000BB7787 /* LaunchScreen.storyboard */; };
+		84B5EE071DEF243E00FFEE1B /* MusubiImagePicker.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 848784271DEDE10B00BB7787 /* MusubiImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,6 +24,19 @@
 			remoteInfo = MusubiImagePicker;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		84B5EE061DEF23DE00FFEE1B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				84B5EE071DEF243E00FFEE1B /* MusubiImagePicker.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8487840D1DEDE0A000BB7787 /* MusubiImagePickerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusubiImagePickerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +108,7 @@
 				848784091DEDE0A000BB7787 /* Sources */,
 				8487840A1DEDE0A000BB7787 /* Frameworks */,
 				8487840B1DEDE0A000BB7787 /* Resources */,
+				84B5EE061DEF23DE00FFEE1B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -116,6 +131,7 @@
 				TargetAttributes = {
 					8487840C1DEDE0A000BB7787 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = V723YSJ67H;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -239,7 +255,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -283,7 +299,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -296,6 +312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = V723YSJ67H;
 				INFOPLIST_FILE = MusubiImagePickerDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ha1f.MusubiImagePickerDemo;
@@ -308,6 +325,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = V723YSJ67H;
 				INFOPLIST_FILE = MusubiImagePickerDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ha1f.MusubiImagePickerDemo;
