@@ -116,21 +116,38 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if defined(__has_feature) && __has_feature(modules)
 @import UIKit;
+@import Foundation;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
+@protocol MusubiImagePickerDelegate;
 @class UIViewController;
 @class NSBundle;
 @class NSCoder;
 
 SWIFT_CLASS("_TtC17MusubiImagePicker17MusubiImagePicker")
 @interface MusubiImagePicker : UINavigationController
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull previouslySelectedAssetLocalIdentifiers;
+@property (nonatomic) NSInteger maxSelectionsCount;
 + (MusubiImagePicker * _Nonnull)instanciate;
+@property (nonatomic, weak) id <MusubiImagePickerDelegate> _Nullable musubiImagePickerDelegate;
 - (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class PHAsset;
+@class PHAssetCollection;
+
+SWIFT_PROTOCOL("_TtP17MusubiImagePicker25MusubiImagePickerDelegate_")
+@protocol MusubiImagePickerDelegate
+- (void)didFinishPickingAssetsWithPicker:(MusubiImagePicker * _Nonnull)picker selectedAssets:(NSArray<PHAsset *> * _Nonnull)selectedAssets assetCollection:(PHAssetCollection * _Null_unspecified)assetCollection;
+@optional
+- (void)didCancelPickingAssetsWithPicker:(MusubiImagePicker * _Nonnull)picker;
+- (void)didSelectAssetAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (void)didDeselectAssetAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 @end
 
 
