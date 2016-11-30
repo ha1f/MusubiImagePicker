@@ -109,6 +109,7 @@
 				848783CE1DEDDE7000BB7787 /* Frameworks */,
 				848783CF1DEDDE7000BB7787 /* Headers */,
 				848783D01DEDDE7000BB7787 /* Resources */,
+				84B5EDF51DEF039B00FFEE1B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -163,6 +164,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		84B5EDF51DEF039B00FFEE1B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "carthage build --no-skip-current";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		848783CD1DEDDE7000BB7787 /* Sources */ = {
