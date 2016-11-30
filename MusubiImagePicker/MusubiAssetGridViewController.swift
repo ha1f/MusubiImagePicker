@@ -95,7 +95,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
     }
     
     private func isCollectionViewCanSelect(_ collectionView: UICollectionView) -> Bool {
-        return collectionView.indexPathsForSelectedItems?.count ?? 0 < maxSelectionsCount
+        return collectionView.indexPathsForSelectedItems?.count ?? 0 < (maxSelectionsCount - previouslySelectedAssetLocalIdentifiers.count)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -131,9 +131,11 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
-        if previouslySelectedAssetLocalIdentifiers.contains(fetchResult.object(at: indexPath.item).localIdentifier) {
+        if let index = previouslySelectedAssetLocalIdentifiers.index(of: fetchResult.object(at: indexPath.item).localIdentifier) {
+            // 含まれている
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
             cell.isSelected = true
+            previouslySelectedAssetLocalIdentifiers.remove(at: index)
         }
         return cell
     }
