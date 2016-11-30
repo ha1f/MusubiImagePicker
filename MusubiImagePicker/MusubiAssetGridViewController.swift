@@ -165,15 +165,20 @@ extension MusubiAssetGridViewController: UICollectionViewDelegateFlowLayout {
     // 周りの余白
     static let edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
+    // TODO: パフォーマンス改善したい
     fileprivate var cellSize: CGSize {
         let space = type(of: self).CELLS_MARGIN
+        
+        var boundSize = collectionView!.bounds.size
+        boundSize.width -= collectionView!.contentInset.left - collectionView!.contentInset.right
+        boundSize.height -= collectionView!.contentInset.top - collectionView!.contentInset.bottom
         
         let contentWidth: CGFloat
         if let direction = (collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection, direction == .horizontal {
             // 横スクロールなら縦並びのセル数として計算
-            contentWidth = collectionView!.bounds.height - MusubiAssetGridViewController.edgeInsets.top - MusubiAssetGridViewController.edgeInsets.bottom
+            contentWidth = boundSize.height - MusubiAssetGridViewController.edgeInsets.top - MusubiAssetGridViewController.edgeInsets.bottom
         } else {
-            contentWidth = collectionView!.bounds.width - MusubiAssetGridViewController.edgeInsets.right - MusubiAssetGridViewController.edgeInsets.left
+            contentWidth = boundSize.width - MusubiAssetGridViewController.edgeInsets.right - MusubiAssetGridViewController.edgeInsets.left
         }
         
         let cellLength = (contentWidth - space * (type(of: self).HORIZONTAL_CELLS_COUNT-1)) / type(of: self).HORIZONTAL_CELLS_COUNT
