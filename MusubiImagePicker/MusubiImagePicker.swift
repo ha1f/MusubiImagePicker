@@ -9,6 +9,12 @@
 import UIKit
 import Photos
 
+public struct MusubiImagePickerConfiguration {
+    public var previouslySelectedAssetLocalIdentifiers = [String]()
+    public var maxSelectionsCount = Int.max
+    public weak var delegate: MusubiImagePickerDelegate?
+}
+
 @objc public protocol MusubiImagePickerDelegate: class {
     func didFinishPickingAssets(picker: MusubiImagePicker, selectedAssets: [PHAsset], assetCollection: PHAssetCollection!)
     @objc optional func didCancelPickingAssets(picker: MusubiImagePicker)
@@ -17,10 +23,8 @@ import Photos
 }
 
 public class MusubiImagePicker: UINavigationController {
-    public var previouslySelectedAssetLocalIdentifiers = [String]()
-    public var maxSelectionsCount = Int.max
+    public var config = MusubiImagePickerConfiguration()
     public static func instanciate() -> MusubiImagePicker {
         return UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as! MusubiImagePicker
     }
-    public weak var musubiImagePickerDelegate: MusubiImagePickerDelegate?
 }
