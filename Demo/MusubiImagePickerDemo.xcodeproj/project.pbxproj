@@ -12,8 +12,6 @@
 		848784161DEDE0A000BB7787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848784141DEDE0A000BB7787 /* Main.storyboard */; };
 		848784181DEDE0A000BB7787 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848784171DEDE0A000BB7787 /* Assets.xcassets */; };
 		8487841B1DEDE0A000BB7787 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848784191DEDE0A000BB7787 /* LaunchScreen.storyboard */; };
-		848784281DEDE1CE00BB7787 /* MusubiImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848784271DEDE10B00BB7787 /* MusubiImagePicker.framework */; };
-		848784321DEEB99C00BB7787 /* MusubiImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848784311DEEB99C00BB7787 /* MusubiImagePicker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +33,6 @@
 		8487841A1DEDE0A000BB7787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8487841C1DEDE0A000BB7787 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848784221DEDE10B00BB7787 /* MusubiImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MusubiImagePicker.xcodeproj; path = ../MusubiImagePicker.xcodeproj; sourceTree = "<group>"; };
-		848784311DEEB99C00BB7787 /* MusubiImagePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MusubiImagePicker.framework; path = ../../Carthage/Build/iOS/MusubiImagePicker.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,8 +40,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				848784281DEDE1CE00BB7787 /* MusubiImagePicker.framework in Frameworks */,
-				848784321DEEB99C00BB7787 /* MusubiImagePicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,7 +66,6 @@
 		8487840F1DEDE0A000BB7787 /* MusubiImagePickerDemo */ = {
 			isa = PBXGroup;
 			children = (
-				848784311DEEB99C00BB7787 /* MusubiImagePicker.framework */,
 				848784101DEDE0A000BB7787 /* AppDelegate.swift */,
 				848784121DEDE0A000BB7787 /* ViewController.swift */,
 				848784141DEDE0A000BB7787 /* Main.storyboard */,
