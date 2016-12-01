@@ -121,17 +121,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
-@protocol MusubiImagePickerDelegate;
 @class UIViewController;
 @class NSBundle;
 @class NSCoder;
 
 SWIFT_CLASS("_TtC17MusubiImagePicker17MusubiImagePicker")
 @interface MusubiImagePicker : UINavigationController
-@property (nonatomic, copy) NSArray<NSString *> * _Nonnull previouslySelectedAssetLocalIdentifiers;
-@property (nonatomic) NSInteger maxSelectionsCount;
 + (MusubiImagePicker * _Nonnull)instanciate;
-@property (nonatomic, weak) id <MusubiImagePickerDelegate> _Nullable musubiImagePickerDelegate;
 - (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
