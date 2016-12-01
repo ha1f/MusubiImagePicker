@@ -15,7 +15,7 @@
 #### Carthage
 
 ```Cartfile
-github "ha1fha1f/MusubiImagePicker"
+github "ha1f/MusubiImagePicker"
 ```
 
 をCartfileに追記してビルド
