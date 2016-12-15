@@ -31,7 +31,12 @@ public struct MusubiImagePickerConfiguration {
 
 public class MusubiImagePicker: UINavigationController {
     public var config = MusubiImagePickerConfiguration()
-    public static func instanciate() -> MusubiImagePicker {
-        return UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as! MusubiImagePicker
+    public static func instanciate() -> MusubiImagePicker? {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized, .notDetermined:
+            return UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as! MusubiImagePicker
+        case .denied, .notDetermined, .restricted:
+            return nil
+        }
     }
 }
