@@ -21,24 +21,26 @@ class ViewController: UIViewController, MusubiImagePickerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let picker = MusubiImagePicker.instanciate() {
-            picker.config.delegate = self
-            // すでにある場合はこれをセットする
-            picker.config.previouslySelectedAssetLocalIdentifiers = ["ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED/L0/001", "495F9CF5-F638-4694-9C48-B73451DA9C7A/L0/001"]
-            picker.config.maxSelectionsCount = 4
-            self.present(picker, animated: true, completion: nil)
-        } else {
-            print("not authoralized")
-            let controller = UIAlertController(title: "アルバムへのアクセスが許可されていません", message: "設定を開きますか？", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
-                
+        MusubiImagePicker.instanciate { picker in
+            if let picker = picker {
+                picker.config.delegate = self
+                // すでにある場合はこれをセットする
+                picker.config.previouslySelectedAssetLocalIdentifiers = ["ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED/L0/001", "495F9CF5-F638-4694-9C48-B73451DA9C7A/L0/001"]
+                picker.config.maxSelectionsCount = 4
+                self.present(picker, animated: true, completion: nil)
+            } else {
+                print("not authoralized")
+                let controller = UIAlertController(title: "アルバムへのアクセスが許可されていません", message: "設定を開きますか？", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
+                    
+                }
+                let settingAction = UIAlertAction(title: "設定", style: .default) { _ in
+                    self.openSettings()
+                }
+                controller.addAction(cancelAction)
+                controller.addAction(settingAction)
+                self.present(controller, animated: true, completion: nil)
             }
-            let settingAction = UIAlertAction(title: "設定", style: .default) { _ in
-                self.openSettings()
-            }
-            controller.addAction(cancelAction)
-            controller.addAction(settingAction)
-            self.present(controller, animated: true, completion: nil)
         }
     }
     

@@ -33,7 +33,9 @@ class MusubiAssetGridViewController: AssetGridViewController {
     }
     
     override func viewDidLoad() {
+        print("willdidload")
         super.viewDidLoad()
+        print("didload")
         
         // 長押ししたら画像を開く
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.onCellPressedLong(_:)))
@@ -44,6 +46,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("didappear")
         // 完了ボタン
         navigationItem.rightBarButtonItem = doneButtonItem
         doneButtonItem.target = self

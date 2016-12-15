@@ -31,12 +31,19 @@ public struct MusubiImagePickerConfiguration {
 
 public class MusubiImagePicker: UINavigationController {
     public var config = MusubiImagePickerConfiguration()
-    public static func instanciate() -> MusubiImagePicker? {
+    public static func instanciate(handler: @escaping (MusubiImagePicker?)->()) {
+        tryInstanciate(handler: handler)
+    }
+    private static func tryInstanciate(handler: @escaping (MusubiImagePicker?)->()) {
         switch PHPhotoLibrary.authorizationStatus() {
-        case .authorized, .notDetermined:
-            return UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as! MusubiImagePicker
-        case .denied, .notDetermined, .restricted:
-            return nil
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization {_ in 
+                tryInstanciate(handler: handler)
+            }
+        case .authorized:
+            handler(UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as! MusubiImagePicker)
+        case .denied, .restricted:
+            handler(nil)
         }
     }
 }
