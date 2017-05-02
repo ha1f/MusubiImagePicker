@@ -144,7 +144,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
             }
         }) { success, error in
             if !success {
-                print("error creating asset: \(error)")
+                print("error creating asset: \(error?.localizedDescription ?? "error")")
             }
         }
     }

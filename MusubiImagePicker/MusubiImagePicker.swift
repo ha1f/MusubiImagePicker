@@ -41,7 +41,7 @@ public class MusubiImagePicker: UINavigationController {
                 tryInstanciate(handler: handler)
             }
         case .authorized:
-            handler(UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as! MusubiImagePicker)
+            handler(UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as? MusubiImagePicker)
         case .denied, .restricted:
             handler(nil)
         }

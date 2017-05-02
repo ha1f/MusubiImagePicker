@@ -170,7 +170,7 @@ class AssetViewController: UIViewController {
                     _ = self.navigationController!.popViewController(animated: true)
                 }
             } else {
-                print("can't remove asset: \(error)")
+                print("can't remove asset: \(error?.localizedDescription ?? "error")")
             }
         }
 
@@ -199,7 +199,7 @@ class AssetViewController: UIViewController {
                     sender.title = self.asset.isFavorite ? "♥︎" : "♡"
                 }
             } else {
-                print("can't set favorite: \(error)")
+                print("can't set favorite: \(error?.localizedDescription ?? "error")")
             }
         })
     }
@@ -297,7 +297,7 @@ class AssetViewController: UIViewController {
             let request = PHAssetChangeRequest(for: self.asset)
             request.revertAssetContentToOriginal()
         }, completionHandler: { success, error in
-            if !success { print("can't revert asset: \(error)") }
+            if !success { print("can't revert asset: \(error?.localizedDescription ?? "error")") }
         })
     }
 
@@ -356,7 +356,7 @@ class AssetViewController: UIViewController {
                             let request = PHAssetChangeRequest(for: self.asset)
                             request.contentEditingOutput = output
                         }, completionHandler: { success, error in
-                            if !success { print("can't edit asset: \(error)") }
+                            if !success { print("can't edit asset: \(error?.localizedDescription ?? "error")") }
                         })
                     })
                 }
