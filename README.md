@@ -79,7 +79,7 @@ class ViewController: UIViewController, MusubiImagePickerDelegate {
 
 ## Build Requirements
 
-Xcode 8.0 (iOS 10.0 SDK) or later
+Xcode 9.0 (iOS 11.0 SDK)
 
 ## Runtime Requirements
 
@@ -87,10 +87,21 @@ iOS 10.0, or later
 
 ## TODO
 
+- delegateのinterfaceの修正
 - headerCells、を作って、カメラ等を追加できるようにする
 - 現状ほぼ改変できないので改変可能にしたい
 - iOS 9.xへの対応
 
+## release手順
+
+```sh
+./Tool/release.sh
+git add .
+git commit -m "prepare for release"
+git push
+```
+
+その後、GitHub上でタグ生成&リリース
 
 ## ライセンス
 ExampleappusingPhotosframework以下のファイルは、Appleの公式サンプル[ExampleappusingPhotosframework](https://developer.apple.com/library/content/samplecode/UsingPhotosFramework/Introduction/Intro.html)から取得したものを一部コメントアウトして使っています
