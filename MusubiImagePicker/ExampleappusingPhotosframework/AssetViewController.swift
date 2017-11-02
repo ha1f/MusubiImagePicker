@@ -124,10 +124,14 @@ class AssetViewController: UIViewController {
 
                     // Create an AVPlayer and AVPlayerLayer with the AVPlayerItem.
                     let player: AVPlayer
-                    if self.asset.playbackStyle == .videoLooping {
-                        let queuePlayer = AVQueuePlayer(playerItem: playerItem)
-                        self.playerLooper = AVPlayerLooper(player: queuePlayer, templateItem: playerItem!)
-                        player = queuePlayer
+                    if #available(iOS 11.0, *) {
+                        if self.asset.playbackStyle == .videoLooping {
+                            let queuePlayer = AVQueuePlayer(playerItem: playerItem)
+                            self.playerLooper = AVPlayerLooper(player: queuePlayer, templateItem: playerItem!)
+                            player = queuePlayer
+                        } else {
+                            player = AVPlayer(playerItem: playerItem)
+                        }
                     } else {
                         player = AVPlayer(playerItem: playerItem)
                     }
@@ -200,33 +204,49 @@ class AssetViewController: UIViewController {
     }
 
     func updateContent() {
-        switch asset.playbackStyle {
-        case .unsupported:
-            let alertController = UIAlertController(title: NSLocalizedString("Unsupported Format", comment:""), message: nil, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
-
-        case .image:
-            updateStillImage()
-
-        case .livePhoto:
-            updateLivePhoto()
-
-        case .imageAnimated:
-            updateAnimatedImage()
-
-        case .video:
-            updateStillImage() // as a placeholder until play is tapped
-
-        case .videoLooping:
-            play(self)
+        if #available(iOS 11.0, *) {
+            switch asset.playbackStyle {
+            case .unsupported:
+                let alertController = UIAlertController(title: NSLocalizedString("Unsupported Format", comment:""), message: nil, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                
+            case .image:
+                updateStillImage()
+                
+            case .livePhoto:
+                updateLivePhoto()
+                
+            case .imageAnimated:
+                updateAnimatedImage()
+                
+            case .video:
+                updateStillImage() // as a placeholder until play is tapped
+                
+            case .videoLooping:
+                play(self)
+            }
+        } else {
+            #if os(iOS)
+                if asset.mediaSubtypes.contains(.photoLive) {
+                    updateLivePhoto()
+                } else {
+                    updateStillImage()
+                }
+            #else
+                updateStaticImage()
+            #endif
         }
     }
 
     func updateToolbars() {
 
         // Enable editing buttons if the asset can be edited.
-        editButton.isEnabled = asset.canPerform(.content) && asset.playbackStyle != .imageAnimated
+        if #available(iOS 11.0, *) {
+            editButton.isEnabled = asset.canPerform(.content) && asset.playbackStyle != .imageAnimated
+        } else {
+            editButton.isEnabled = asset.canPerform(.content)
+        }
         favoriteButton.isEnabled = asset.canPerform(.properties)
         favoriteButton.title = asset.isFavorite ? "♥︎" : "♡"
 
@@ -238,7 +258,7 @@ class AssetViewController: UIViewController {
         }
 
         // Set the appropriate toolbarItems based on the playbackStyle of the asset.
-        if asset.playbackStyle == .video {
+        if #available(iOS 11.0, *), asset.playbackStyle == .video {
             #if os(iOS)
                 toolbarItems = [favoriteButton, space, playButton, space, trashButton]
                 navigationController?.isToolbarHidden = false
@@ -348,6 +368,7 @@ class AssetViewController: UIViewController {
 
         self.progressView.isHidden = false
         PHImageManager.default().requestImageData(for: asset, options: options) { (data, _, _, _) in
+            
             // Hide the progress view now the request has completed.
             self.progressView.isHidden = true
 
