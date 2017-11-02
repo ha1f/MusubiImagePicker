@@ -12,33 +12,40 @@
 		848784161DEDE0A000BB7787 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848784141DEDE0A000BB7787 /* Main.storyboard */; };
 		848784181DEDE0A000BB7787 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848784171DEDE0A000BB7787 /* Assets.xcassets */; };
 		8487841B1DEDE0A000BB7787 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848784191DEDE0A000BB7787 /* LaunchScreen.storyboard */; };
-		84B5EE071DEF243E00FFEE1B /* MusubiImagePicker.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 848784271DEDE10B00BB7787 /* MusubiImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		848784261DEDE10B00BB7787 /* PBXContainerItemProxy */ = {
+		566B646C1FAB15F900625364 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 848784221DEDE10B00BB7787 /* MusubiImagePicker.xcodeproj */;
+			containerPortal = 566B64681FAB15F900625364 /* MusubiImagePicker.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 848783D21DEDDE7000BB7787;
+			remoteInfo = MusubiImagePicker;
+		};
+		566B646E1FAB160600625364 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 566B64681FAB15F900625364 /* MusubiImagePicker.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 848783D11DEDDE7000BB7787;
 			remoteInfo = MusubiImagePicker;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		84B5EE061DEF23DE00FFEE1B /* CopyFiles */ = {
+		84B5EE061DEF23DE00FFEE1B /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				84B5EE071DEF243E00FFEE1B /* MusubiImagePicker.framework in CopyFiles */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		566B64681FAB15F900625364 /* MusubiImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MusubiImagePicker.xcodeproj; path = ../MusubiImagePicker.xcodeproj; sourceTree = "<group>"; };
 		8487840D1DEDE0A000BB7787 /* MusubiImagePickerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusubiImagePickerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848784101DEDE0A000BB7787 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		848784121DEDE0A000BB7787 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,7 +53,6 @@
 		848784171DEDE0A000BB7787 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8487841A1DEDE0A000BB7787 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8487841C1DEDE0A000BB7787 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		848784221DEDE10B00BB7787 /* MusubiImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MusubiImagePicker.xcodeproj; path = ../MusubiImagePicker.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +66,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		566B64691FAB15F900625364 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				566B646D1FAB15F900625364 /* MusubiImagePicker.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		848784041DEDE0A000BB7787 = {
 			isa = PBXGroup;
 			children = (
-				848784221DEDE10B00BB7787 /* MusubiImagePicker.xcodeproj */,
+				566B64681FAB15F900625364 /* MusubiImagePicker.xcodeproj */,
 				8487840F1DEDE0A000BB7787 /* MusubiImagePickerDemo */,
 				8487840E1DEDE0A000BB7787 /* Products */,
 			);
@@ -90,14 +104,6 @@
 			path = MusubiImagePickerDemo;
 			sourceTree = "<group>";
 		};
-		848784231DEDE10B00BB7787 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				848784271DEDE10B00BB7787 /* MusubiImagePicker.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -108,11 +114,12 @@
 				848784091DEDE0A000BB7787 /* Sources */,
 				8487840A1DEDE0A000BB7787 /* Frameworks */,
 				8487840B1DEDE0A000BB7787 /* Resources */,
-				84B5EE061DEF23DE00FFEE1B /* CopyFiles */,
+				84B5EE061DEF23DE00FFEE1B /* Copy Files */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				566B646F1FAB160600625364 /* PBXTargetDependency */,
 			);
 			name = MusubiImagePickerDemo;
 			productName = MusubiImagePickerDemo;
@@ -126,12 +133,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "はるふ";
 				TargetAttributes = {
 					8487840C1DEDE0A000BB7787 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = V723YSJ67H;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -149,8 +157,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 848784231DEDE10B00BB7787 /* Products */;
-					ProjectRef = 848784221DEDE10B00BB7787 /* MusubiImagePicker.xcodeproj */;
+					ProductGroup = 566B64691FAB15F900625364 /* Products */;
+					ProjectRef = 566B64681FAB15F900625364 /* MusubiImagePicker.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -161,11 +169,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		848784271DEDE10B00BB7787 /* MusubiImagePicker.framework */ = {
+		566B646D1FAB15F900625364 /* MusubiImagePicker.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = MusubiImagePicker.framework;
-			remoteRef = 848784261DEDE10B00BB7787 /* PBXContainerItemProxy */;
+			remoteRef = 566B646C1FAB15F900625364 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -194,6 +202,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		566B646F1FAB160600625364 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MusubiImagePicker;
+			targetProxy = 566B646E1FAB160600625364 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		848784141DEDE0A000BB7787 /* Main.storyboard */ = {
@@ -224,7 +240,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -232,7 +250,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -256,7 +278,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -275,7 +297,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -283,7 +307,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -301,7 +329,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -319,7 +347,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ha1f.MusubiImagePickerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -332,7 +361,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ha1f.MusubiImagePickerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

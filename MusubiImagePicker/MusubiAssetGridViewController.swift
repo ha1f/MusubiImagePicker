@@ -68,7 +68,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
         destination.assetCollection = assetCollection
     }
     
-    func onCellPressedLong(_ recognizer: UILongPressGestureRecognizer) {
+    @objc func onCellPressedLong(_ recognizer: UILongPressGestureRecognizer) {
         guard recognizer.view! == collectionView! else {
             return
         }
@@ -79,11 +79,11 @@ class MusubiAssetGridViewController: AssetGridViewController {
         }
     }
     
-    func onCancelPickingAssets() {
+    @objc func onCancelPickingAssets() {
         delegate?.didCancelPickingAssets?(picker: musubiImagePicker)
     }
     
-    func onFinishSelectingAssets() {
+    @objc func onFinishSelectingAssets() {
         let selectedAssets = fetchResult.objects(at: IndexSet(self.collectionView!.indexPathsForSelectedItems!.map { $0.item }))
         delegate?.didFinishPickingAssets(picker: musubiImagePicker, selectedAssets: selectedAssets, assetCollection: assetCollection)
     }
