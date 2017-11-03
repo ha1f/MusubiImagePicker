@@ -17,6 +17,9 @@ public struct MusubiImagePickerConfiguration {
     // delegate
     public weak var delegate: MusubiImagePickerDelegate?
     
+    /// Title shown on Navigation bar
+    public var title = ""
+    
     public var isEditingEnabled = false
     public var isDeletingEnabled = false
     public var isFavoriteEnabled = false
@@ -31,19 +34,36 @@ public struct MusubiImagePickerConfiguration {
 
 public class MusubiImagePicker: UINavigationController {
     public var config = MusubiImagePickerConfiguration()
+    
     public static func instanciate(handler: @escaping (MusubiImagePicker?)->()) {
         tryInstanciate(handler: handler)
     }
-    private static func tryInstanciate(handler: @escaping (MusubiImagePicker?)->()) {
-        switch PHPhotoLibrary.authorizationStatus() {
+    
+    public static func tryAuthorize(_ handler: @escaping (Bool) -> Void) {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
         case .notDetermined:
-            PHPhotoLibrary.requestAuthorization {_ in 
-                tryInstanciate(handler: handler)
+            PHPhotoLibrary.requestAuthorization { _ in
+                tryAuthorize(handler)
             }
         case .authorized:
-            handler(UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as? MusubiImagePicker)
+            handler(true)
         case .denied, .restricted:
-            handler(nil)
+            handler(false)
         }
+    }
+    
+    private static func tryInstanciate(handler: @escaping (MusubiImagePicker?)->()) {
+        tryAuthorize { isAuthorized in
+            if isAuthorized {
+                handler(instantiateFromStoryboard())
+            } else {
+                handler(nil)
+            }
+        }
+    }
+    
+    private static func instantiateFromStoryboard() -> MusubiImagePicker? {
+        return UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as? MusubiImagePicker
     }
 }

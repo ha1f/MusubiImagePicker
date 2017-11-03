@@ -33,9 +33,9 @@ class MusubiAssetGridViewController: AssetGridViewController {
     }
     
     override func viewDidLoad() {
-        print("willdidload")
         super.viewDidLoad()
-        print("didload")
+        
+        self.title = config.title
         
         // 長押ししたら画像を開く
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.onCellPressedLong(_:)))
@@ -46,7 +46,6 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("didappear")
         // 完了ボタン
         navigationItem.rightBarButtonItem = doneButtonItem
         doneButtonItem.target = self
@@ -61,7 +60,8 @@ class MusubiAssetGridViewController: AssetGridViewController {
     // Asset詳細への遷移でindexPathを渡すようにしたので変更
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destination = segue.destination as? MusubiAssetViewController else {
-            fatalError("unexpected view controller for segue")
+            assertionFailure("unexpected view controller for segue")
+            return
         }
         let indexPath = sender as! IndexPath
         destination.asset = fetchResult.object(at: indexPath.item)
