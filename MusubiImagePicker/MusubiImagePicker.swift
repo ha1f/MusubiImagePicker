@@ -28,6 +28,17 @@ public class MusubiImagePicker {
     public static func show(from viewController: UIViewController, config: MusubiImagePickerConfiguration) {
         tryInstanciate { picker in
             guard let picker = picker else {
+                let controller = UIAlertController(title: "アルバムへのアクセスが許可されていません", message: "設定を開きますか？", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
+                    // do nothing
+                }
+                let settingAction = UIAlertAction(title: "設定", style: .default) { _ in
+                    openSettings()
+                }
+                controller.addAction(cancelAction)
+                controller.addAction(settingAction)
+                
+                viewController.present(controller, animated: true, completion: nil)
                 return
             }
             DispatchQueue.main.async {
@@ -45,7 +56,13 @@ public class MusubiImagePicker {
         }
     }
     
-    public static func tryAuthorize(_ handler: @escaping (Bool) -> Void) {
+    private static func openSettings() {
+        if let url = URL(string: UIApplicationOpenSettingsURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    private static func tryAuthorize(_ handler: @escaping (Bool) -> Void) {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .notDetermined:
