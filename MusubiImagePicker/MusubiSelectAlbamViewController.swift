@@ -9,8 +9,13 @@
 import UIKit
 import Photos
 
+protocol MusubiSelectAlbamViewControllerDelegate: class {
+    func selectAlbamViewController(didSelect collection: PHAssetCollection?)
+}
+
 class AlbamCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var countLabel: UILabel!
 }
 
 // Similar to MasterViewController in Example
@@ -26,6 +31,7 @@ class MusubiSelectAlbamViewController: UIViewController {
     var allPhotos: PHFetchResult<PHAsset>!
     var smartAlbums: PHFetchResult<PHAssetCollection>!
     var userCollections: PHFetchResult<PHCollection>!
+    weak var delegate: MusubiSelectAlbamViewControllerDelegate?
     
     let sectionLocalizedTitles = ["", NSLocalizedString("Smart Albums", comment: ""), NSLocalizedString("Albums", comment: "")]
     
@@ -66,6 +72,19 @@ extension MusubiSelectAlbamViewController: UITableViewDataSource, UITableViewDel
         return Section.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch Section(rawValue: indexPath.section) ?? Section.allPhotos {
+        case .allPhotos:
+            delegate?.selectAlbamViewController(didSelect: nil)
+        case .smartAlbums:
+            let collection = smartAlbums.object(at: indexPath.row)
+            delegate?.selectAlbamViewController(didSelect: collection)
+        case .userCollections:
+            let collection = userCollections.object(at: indexPath.row)
+            delegate?.selectAlbamViewController(didSelect: collection as? PHAssetCollection)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue: section)! {
         case .allPhotos: return 1
@@ -79,18 +98,23 @@ extension MusubiSelectAlbamViewController: UITableViewDataSource, UITableViewDel
         case .allPhotos:
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? AlbamCell
             cell?.titleLabel.text = NSLocalizedString("All Photos", comment: "")
+            cell?.countLabel.text = ""
             return cell ?? UITableViewCell()
             
         case .smartAlbums:
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? AlbamCell
             let collection = smartAlbums.object(at: indexPath.row)
             cell?.titleLabel.text = collection.localizedTitle
+            cell?.countLabel.text = "\(PHAsset.fetchAssets(in: collection, options: nil).count)"
             return cell ?? UITableViewCell()
             
         case .userCollections:
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? AlbamCell
             let collection = userCollections.object(at: indexPath.row)
             cell?.titleLabel.text = collection.localizedTitle
+            if let collection = collection as? PHAssetCollection {
+                cell?.countLabel.text = "\(PHAsset.fetchAssets(in: collection, options: nil).count)"
+            }
             return cell ?? UITableViewCell()
         }
     }

@@ -40,13 +40,26 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCU-ML-7Ke">
+                                                    <rect key="frame" x="257" y="16" width="80" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="O8n-md-IvB"/>
+                                                        <constraint firstAttribute="height" constant="40" id="dfc-sZ-zxm"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="CcG-Cb-gV6" firstAttribute="leading" secondItem="h2n-Ae-sd7" secondAttribute="leadingMargin" constant="17" id="3Li-kS-GRk"/>
+                                                <constraint firstItem="sCU-ML-7Ke" firstAttribute="centerY" secondItem="h2n-Ae-sd7" secondAttribute="centerY" id="UHr-X0-zsQ"/>
                                                 <constraint firstItem="CcG-Cb-gV6" firstAttribute="centerY" secondItem="h2n-Ae-sd7" secondAttribute="centerY" id="dGH-VD-3tL"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="sCU-ML-7Ke" secondAttribute="trailing" constant="30" id="gRV-vq-Yeo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="countLabel" destination="sCU-ML-7Ke" id="Sdz-Mm-JYI"/>
                                             <outlet property="titleLabel" destination="CcG-Cb-gV6" id="zqi-0k-p7S"/>
                                         </connections>
                                     </tableViewCell>

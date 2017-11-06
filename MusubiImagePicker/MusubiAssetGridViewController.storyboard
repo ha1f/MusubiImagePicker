@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DYW-1q-8sM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Musubi Asset Grid View Controller-->
+        <scene sceneID="eYy-ak-bVO">
+            <objects>
+                <collectionViewController hidesBottomBarWhenPushed="YES" id="DYW-1q-8sM" customClass="MusubiAssetGridViewController" customModule="MusubiImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EDg-WQ-Ho3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="t1p-gd-Rhp">
+                            <size key="itemSize" width="80" height="80"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridViewCell" id="zu5-L9-jEx" customClass="MusubiGridViewCell" customModule="MusubiImagePicker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vcc-Ju-Ccg">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        </imageView>
+                                        <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QeU-xW-z6w">
+                                            <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="28" placeholder="YES" id="fsz-NU-hOn"/>
+                                                <constraint firstAttribute="height" constant="28" placeholder="YES" id="swP-lx-5pP"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="Vcc-Ju-Ccg" firstAttribute="top" secondItem="zu5-L9-jEx" secondAttribute="top" id="27e-81-fxi"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vcc-Ju-Ccg" secondAttribute="bottom" id="4Ns-4Y-scp"/>
+                                    <constraint firstItem="Vcc-Ju-Ccg" firstAttribute="leading" secondItem="zu5-L9-jEx" secondAttribute="leading" id="H9R-l8-TAK"/>
+                                    <constraint firstItem="QeU-xW-z6w" firstAttribute="leading" secondItem="zu5-L9-jEx" secondAttribute="leading" id="KOF-w4-CXO"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vcc-Ju-Ccg" secondAttribute="trailing" id="LjD-a5-AHR"/>
+                                    <constraint firstItem="QeU-xW-z6w" firstAttribute="top" secondItem="zu5-L9-jEx" secondAttribute="top" id="NJW-di-tao"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="Vcc-Ju-Ccg" id="OVo-iI-J61"/>
+                                    <outlet property="livePhotoBadgeImageView" destination="QeU-xW-z6w" id="ddl-UH-iCU"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="DYW-1q-8sM" id="bce-CE-JlU"/>
+                            <outlet property="delegate" destination="DYW-1q-8sM" id="06V-FZ-qgb"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="Ouz-Ph-sHW"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cancelButtonItem" destination="TG0-Mm-nc5" id="3ui-Bu-AWM"/>
+                        <outlet property="collectionView" destination="EDg-WQ-Ho3" id="xFe-kx-KyP"/>
+                        <outlet property="doneButtonItem" destination="4hY-xv-fHe" id="zUQ-Ff-Aai"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KR2-l5-5kg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem style="plain" systemItem="done" id="4hY-xv-fHe"/>
+                <barButtonItem style="plain" systemItem="cancel" id="TG0-Mm-nc5"/>
+            </objects>
+            <point key="canvasLocation" x="1010" y="128"/>
+        </scene>
+    </scenes>
+</document>

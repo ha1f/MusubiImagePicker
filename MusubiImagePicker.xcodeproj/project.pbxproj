@@ -12,6 +12,10 @@
 		566B64781FAB198000625364 /* AssetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 566B64771FAB194C00625364 /* AssetViewController.storyboard */; };
 		5694CDA91FAFF27C002521C7 /* MusubiSelectAlbamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5694CDA81FAFF27C002521C7 /* MusubiSelectAlbamViewController.swift */; };
 		5694CDAB1FAFF298002521C7 /* MusubiSelectAlbamViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5694CDAA1FAFF298002521C7 /* MusubiSelectAlbamViewController.storyboard */; };
+		5694CDAF1FAFFF6E002521C7 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5694CDAE1FAFFF6E002521C7 /* Util.swift */; };
+		5694CDB11FB001DE002521C7 /* MusubiImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5694CDB01FB001DE002521C7 /* MusubiImagePickerViewController.swift */; };
+		5694CDB31FB00208002521C7 /* MusubiImagePickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5694CDB21FB00208002521C7 /* MusubiImagePickerViewController.storyboard */; };
+		5694CDB51FB00294002521C7 /* MusubiAssetGridViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5694CDB41FB00294002521C7 /* MusubiAssetGridViewController.storyboard */; };
 		848783D71DEDDE7000BB7787 /* MusubiImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 848783D51DEDDE7000BB7787 /* MusubiImagePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		848783E01DEDDF0300BB7787 /* AssetGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848783DF1DEDDF0300BB7787 /* AssetGridViewController.swift */; };
 		848783E21DEDDF0C00BB7787 /* AssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848783E11DEDDF0C00BB7787 /* AssetViewController.swift */; };
@@ -30,6 +34,10 @@
 		566B64771FAB194C00625364 /* AssetViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AssetViewController.storyboard; sourceTree = "<group>"; };
 		5694CDA81FAFF27C002521C7 /* MusubiSelectAlbamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiSelectAlbamViewController.swift; sourceTree = "<group>"; };
 		5694CDAA1FAFF298002521C7 /* MusubiSelectAlbamViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MusubiSelectAlbamViewController.storyboard; sourceTree = "<group>"; };
+		5694CDAE1FAFFF6E002521C7 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		5694CDB01FB001DE002521C7 /* MusubiImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiImagePickerViewController.swift; sourceTree = "<group>"; };
+		5694CDB21FB00208002521C7 /* MusubiImagePickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MusubiImagePickerViewController.storyboard; sourceTree = "<group>"; };
+		5694CDB41FB00294002521C7 /* MusubiAssetGridViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusubiAssetGridViewController.storyboard; sourceTree = "<group>"; };
 		848783D21DEDDE7000BB7787 /* MusubiImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusubiImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		848783D51DEDDE7000BB7787 /* MusubiImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiImagePicker.h; sourceTree = "<group>"; };
 		848783D61DEDDE7000BB7787 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,14 +83,18 @@
 			isa = PBXGroup;
 			children = (
 				848783ED1DEDDF9C00BB7787 /* MusubiImagePicker.storyboard */,
+				5694CDB41FB00294002521C7 /* MusubiAssetGridViewController.storyboard */,
 				566B64771FAB194C00625364 /* AssetViewController.storyboard */,
 				5694CDAA1FAFF298002521C7 /* MusubiSelectAlbamViewController.storyboard */,
+				5694CDB21FB00208002521C7 /* MusubiImagePickerViewController.storyboard */,
 				848783E51DEDDF4A00BB7787 /* CheckBoxView.swift */,
 				5694CDA81FAFF27C002521C7 /* MusubiSelectAlbamViewController.swift */,
 				848783E61DEDDF4A00BB7787 /* MusubiAssetGridViewController.swift */,
 				848783E71DEDDF4A00BB7787 /* MusubiGridViewCell.swift */,
 				848784291DEDE22F00BB7787 /* MusubiImagePicker.swift */,
+				5694CDB01FB001DE002521C7 /* MusubiImagePickerViewController.swift */,
 				84B5EE081DEF379800FFEE1B /* MusubiAssetViewController.swift */,
+				5694CDAE1FAFFF6E002521C7 /* Util.swift */,
 				848783DE1DEDDEDC00BB7787 /* ExampleappusingPhotosframework */,
 				848783D51DEDDE7000BB7787 /* MusubiImagePicker.h */,
 				848783D61DEDDE7000BB7787 /* Info.plist */,
@@ -174,6 +186,8 @@
 			files = (
 				5694CDAB1FAFF298002521C7 /* MusubiSelectAlbamViewController.storyboard in Resources */,
 				566B64781FAB198000625364 /* AssetViewController.storyboard in Resources */,
+				5694CDB31FB00208002521C7 /* MusubiImagePickerViewController.storyboard in Resources */,
+				5694CDB51FB00294002521C7 /* MusubiAssetGridViewController.storyboard in Resources */,
 				848783EE1DEDDF9C00BB7787 /* MusubiImagePicker.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5694CDB11FB001DE002521C7 /* MusubiImagePickerViewController.swift in Sources */,
 				848783E01DEDDF0300BB7787 /* AssetGridViewController.swift in Sources */,
 				848783E21DEDDF0C00BB7787 /* AssetViewController.swift in Sources */,
 				566B64721FAB173300625364 /* AnimatedImageView.swift in Sources */,
@@ -192,6 +207,7 @@
 				848783E91DEDDF4A00BB7787 /* MusubiAssetGridViewController.swift in Sources */,
 				848783E81DEDDF4A00BB7787 /* CheckBoxView.swift in Sources */,
 				5694CDA91FAFF27C002521C7 /* MusubiSelectAlbamViewController.swift in Sources */,
+				5694CDAF1FAFFF6E002521C7 /* Util.swift in Sources */,
 				8487842A1DEDE22F00BB7787 /* MusubiImagePicker.swift in Sources */,
 				84B5EE091DEF379800FFEE1B /* MusubiAssetViewController.swift in Sources */,
 				566B64731FAB173300625364 /* AnimatedImage.swift in Sources */,
@@ -324,14 +340,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = MusubiImagePicker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ha1f.MusubiImagePicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};

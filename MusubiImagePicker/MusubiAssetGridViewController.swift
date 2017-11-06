@@ -19,18 +19,20 @@ class MusubiAssetGridViewController: AssetGridViewController {
         return config.delegate
     }
     
-    var musubiImagePicker: MusubiImagePicker {
-        return self.navigationController! as! MusubiImagePicker
+    var musubiImagePicker: MusubiImagePicker? {
+        return self.parent?.navigationController as? MusubiImagePicker
     }
     
     var config: MusubiImagePickerConfiguration {
         set {
-            musubiImagePicker.config = newValue
+            musubiImagePicker?.config = newValue
         }
         get {
-            return musubiImagePicker.config
+            return musubiImagePicker?.config ?? MusubiImagePickerConfiguration()
         }
     }
+    
+    var isSelectViewShowing: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,20 +46,24 @@ class MusubiAssetGridViewController: AssetGridViewController {
         collectionView?.allowsMultipleSelection = true
         
         if fetchResult == nil {
-            setResult()
+            setResultAllPhotos()
         }
     }
     
-    private func setResult(with collection: PHAssetCollection? = nil) {
+    func setResultAllPhotos() {
         let options = PHFetchOptions()
         options.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: false) ]
-        if let collection = collection {
-            self.title = collection.localizedTitle ?? ""
-            fetchResult = PHAsset.fetchAssets(in: collection, options: options)
-        } else {
-            self.title = "All Photos"
-            fetchResult = PHAsset.fetchAssets(with: options)
-        }
+        fetchResult = PHAsset.fetchAssets(with: options)
+        assetCollection = nil
+        self.collectionView?.reloadData()
+    }
+    
+    func setResult(with collection: PHAssetCollection) {
+        let options = PHFetchOptions()
+        options.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: false) ]
+        fetchResult = PHAsset.fetchAssets(in: collection, options: options)
+        assetCollection = collection
+        self.collectionView?.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,21 +91,27 @@ class MusubiAssetGridViewController: AssetGridViewController {
     }
     
     @objc func onCellPressedLong(_ recognizer: UILongPressGestureRecognizer) {
-        guard recognizer.view! == collectionView! else {
+        guard let collectionView = self.collectionView, recognizer.view == collectionView else {
             return
         }
         if recognizer.state == .began {
             let point = recognizer.location(in: recognizer.view)
-            let indexPath = self.collectionView!.indexPathForItem(at: point)!
+            let indexPath = collectionView.indexPathForItem(at: point)!
             self.performSegue(withIdentifier: "showAsset", sender: indexPath)
         }
     }
     
     @objc func onCancelPickingAssets() {
+        guard let musubiImagePicker = musubiImagePicker else {
+            return
+        }
         delegate?.didCancelPickingAssets?(picker: musubiImagePicker)
     }
     
     @objc func onFinishSelectingAssets() {
+        guard let musubiImagePicker = musubiImagePicker else {
+            return
+        }
         let selectedAssets = fetchResult.objects(at: IndexSet(self.collectionView!.indexPathsForSelectedItems!.map { $0.item }))
         delegate?.didFinishPickingAssets(picker: musubiImagePicker, selectedAssets: selectedAssets, assetCollection: assetCollection)
     }

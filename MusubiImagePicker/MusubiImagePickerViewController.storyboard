@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JRr-ac-Nrx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Musubi Image Picker View Controller-->
+        <scene sceneID="6Xl-vm-x9g">
+            <objects>
+                <viewController id="JRr-ac-Nrx" customClass="MusubiImagePickerViewController" customModule="MusubiImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lXz-az-7xW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Np6-nR-E2d">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <connections>
+                                    <segue destination="0vX-1F-CKz" kind="embed" id="jOL-HX-NIW"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QpM-rQ-70p">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <connections>
+                                    <segue destination="740-Yh-1cw" kind="embed" id="0sM-fp-MqU"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Np6-nR-E2d" firstAttribute="trailing" secondItem="keW-OW-Psw" secondAttribute="trailing" id="Fd5-fT-ueR"/>
+                            <constraint firstItem="QpM-rQ-70p" firstAttribute="bottom" secondItem="keW-OW-Psw" secondAttribute="bottom" id="O9e-LZ-ADM"/>
+                            <constraint firstItem="QpM-rQ-70p" firstAttribute="leading" secondItem="keW-OW-Psw" secondAttribute="leading" id="Qqu-nS-4Et"/>
+                            <constraint firstItem="QpM-rQ-70p" firstAttribute="trailing" secondItem="keW-OW-Psw" secondAttribute="trailing" id="iSI-cb-gOU"/>
+                            <constraint firstItem="Np6-nR-E2d" firstAttribute="leading" secondItem="keW-OW-Psw" secondAttribute="leading" id="lOW-ue-Wob"/>
+                            <constraint firstItem="Np6-nR-E2d" firstAttribute="bottom" secondItem="keW-OW-Psw" secondAttribute="bottom" id="qvv-m8-obc"/>
+                            <constraint firstItem="Np6-nR-E2d" firstAttribute="top" secondItem="keW-OW-Psw" secondAttribute="top" id="woP-6Q-16E"/>
+                            <constraint firstItem="QpM-rQ-70p" firstAttribute="top" secondItem="keW-OW-Psw" secondAttribute="top" id="xSz-yW-nfu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="keW-OW-Psw"/>
+                    </view>
+                    <connections>
+                        <outlet property="assetGridView" destination="Np6-nR-E2d" id="jcN-c1-L8k"/>
+                        <outlet property="selectAlbamView" destination="QpM-rQ-70p" id="IXX-nv-Qvq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7dL-y0-ZPP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="183" y="198"/>
+        </scene>
+        <!--MusubiAssetGridViewController-->
+        <scene sceneID="yTZ-A2-rO1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MusubiAssetGridViewController" id="0vX-1F-CKz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="58L-i2-MNg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="839" y="185"/>
+        </scene>
+        <!--MusubiSelectAlbamViewController-->
+        <scene sceneID="C9E-tn-ozP">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MusubiSelectAlbamViewController" id="740-Yh-1cw" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zmf-IU-b7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="850" y="236"/>
+        </scene>
+    </scenes>
+</document>

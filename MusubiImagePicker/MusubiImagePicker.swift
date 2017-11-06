@@ -64,6 +64,6 @@ public class MusubiImagePicker: UINavigationController {
     }
     
     private static func instantiateFromStoryboard() -> MusubiImagePicker? {
-        return UIStoryboard(name: "MusubiImagePicker", bundle: Bundle(identifier: "net.ha1f.MusubiImagePicker")).instantiateInitialViewController() as? MusubiImagePicker
+        return UIStoryboard(name: "MusubiImagePicker", bundle: Bundle.musubiImagePicker).instantiateInitialViewController() as? MusubiImagePicker
     }
 }
