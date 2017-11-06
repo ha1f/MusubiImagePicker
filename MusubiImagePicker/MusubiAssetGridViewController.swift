@@ -93,20 +93,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
         }
     }
     
-//    @objc func onCancelPickingAssets() {
-//        guard let musubiImagePicker = musubiImagePicker else {
-//            return
-//        }
-//        delegate?.didCancelPickingAssets?(picker: musubiImagePicker)
-//    }
-    
-//    @objc func onFinishSelectingAssets() {
-//        guard let musubiImagePicker = musubiImagePicker else {
-//            return
-//        }
-//        let selectedAssets = fetchResult.objects(at: IndexSet(self.collectionView!.indexPathsForSelectedItems!.map { $0.item }))
-//        delegate?.didFinishPickingAssets(picker: musubiImagePicker, selectedAssets: selectedAssets, assetCollection: assetCollection)
-//    }
+    // MARK: - UICollectionView
     
     private func isCollectionViewCanSelect(_ collectionView: UICollectionView) -> Bool {
         return collectionView.indexPathsForSelectedItems?.count ?? 0 < (config.maxSelectionsCount - config.previouslySelectedAssetLocalIdentifiers.count)
@@ -154,24 +141,24 @@ class MusubiAssetGridViewController: AssetGridViewController {
         return cell
     }
     
-    private func addAsset(image: UIImage) {
-        // photo libraryに追加
-        PHPhotoLibrary.shared().performChanges({
-            let creationRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
-            if let assetCollection = self.assetCollection {
-                let addAssetRequest = PHAssetCollectionChangeRequest(for: assetCollection)
-                addAssetRequest?.addAssets([creationRequest.placeholderForCreatedAsset!] as NSArray)
-            }
-        }) { success, error in
-            if !success {
-                print("error creating asset: \(error?.localizedDescription ?? "error")")
-            }
-        }
-    }
+//    private func addAsset(image: UIImage) {
+//        // photo libraryに追加
+//        PHPhotoLibrary.shared().performChanges({
+//            let creationRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
+//            if let assetCollection = self.assetCollection {
+//                let addAssetRequest = PHAssetCollectionChangeRequest(for: assetCollection)
+//                addAssetRequest?.addAssets([creationRequest.placeholderForCreatedAsset!] as NSArray)
+//            }
+//        }) { success, error in
+//            if !success {
+//                print("error creating asset: \(error?.localizedDescription ?? "error")")
+//            }
+//        }
+//    }
 }
 
 extension MusubiAssetGridViewController: UICollectionViewDelegateFlowLayout {
-    // MARK: LayoutDelegates
+    // MARK: UICollectionViewDelegateFlowLayout
     // 横に並ぶセルの数
     static let HORIZONTAL_CELLS_COUNT: CGFloat = 3
     // セルの間隔
