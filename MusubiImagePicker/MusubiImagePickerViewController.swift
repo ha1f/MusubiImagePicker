@@ -26,6 +26,13 @@ public class MusubiImagePickerViewController: UIViewController {
     var selectedLocalIdentifiers = [String]() {
         didSet {
             deselectBarButtonItem.isEnabled = !selectedLocalIdentifiers.isEmpty
+            updateTitle()
+        }
+    }
+    
+    public var albamTitle: String = "" {
+        didSet {
+            updateTitle()
         }
     }
     
@@ -34,8 +41,17 @@ public class MusubiImagePickerViewController: UIViewController {
             guard let label = navigationItem.titleView as? UILabel else {
                 return
             }
+            label.numberOfLines = 2
             label.text = title
             label.sizeToFit()
+        }
+    }
+    
+    private func updateTitle() {
+        if selectedLocalIdentifiers.isEmpty {
+            self.title = "\(albamTitle)"
+        } else {
+            self.title = "\(albamTitle)\n\(selectedLocalIdentifiers.count)件選択中"
         }
     }
     
@@ -86,10 +102,10 @@ public class MusubiImagePickerViewController: UIViewController {
     
     private func setResult(with collection: PHAssetCollection? = nil) {
         if let collection = collection {
-            self.title = collection.localizedTitle ?? "Albam"
+            self.albamTitle = collection.localizedTitle ?? "Albam"
             assetGridViewController?.setResult(with: collection)
         } else {
-            self.title = "All Photos"
+            self.albamTitle = "All Photos"
             assetGridViewController?.setResultAllPhotos()
         }
     }
@@ -112,7 +128,7 @@ public class MusubiImagePickerViewController: UIViewController {
     @objc
     func onDeselectAll() {
         selectedLocalIdentifiers = []
-        assetGridViewController?.reloadCollectionView()
+        assetGridViewController?.reloadWithAnimation()
     }
     
     @objc

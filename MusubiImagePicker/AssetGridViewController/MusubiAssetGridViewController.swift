@@ -58,7 +58,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         fetchResult = PHAsset.fetchAssets(with: options)
         assetCollection = nil
-        reloadCollectionView()
+        collectionView?.reloadData()
     }
     
     func setResult(with collection: PHAssetCollection) {
@@ -66,11 +66,15 @@ class MusubiAssetGridViewController: AssetGridViewController {
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         fetchResult = PHAsset.fetchAssets(in: collection, options: options)
         assetCollection = collection
-        reloadCollectionView()
+        collectionView?.reloadData()
     }
     
-    func reloadCollectionView() {
-        self.collectionView?.reloadData()
+    func reloadWithAnimation() {
+        if let indexPaths = collectionView?.indexPathsForVisibleItems {
+            print(indexPaths)
+            collectionView?.reloadItems(at: indexPaths)
+        }
+        collectionView?.reloadData()
     }
     
     @objc func onCellPressedLong(_ recognizer: UILongPressGestureRecognizer) {
