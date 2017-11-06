@@ -14,8 +14,6 @@ public struct MusubiImagePickerConfiguration {
     public var previouslySelectedAssetLocalIdentifiers = [String]()
     // 選択可能枚数（初期値は上限なし）
     public var maxSelectionsCount = Int.max
-    // delegate
-//    public weak var delegate: MusubiImagePickerDelegate?
     
     public init() {
         
@@ -25,13 +23,6 @@ public struct MusubiImagePickerConfiguration {
     public var isDeletingEnabled = false
     public var isFavoriteEnabled = false
 }
-
-//@objc public protocol MusubiImagePickerDelegate: class {
-//    func didFinishPickingAssets(picker: MusubiImagePicker, selectedAssets: [PHAsset], assetCollection: PHAssetCollection!)
-//    @objc optional func didCancelPickingAssets(picker: MusubiImagePicker)
-//    @objc optional func didSelectAssetAt(indexPath: IndexPath)
-//    @objc optional func didDeselectAssetAt(indexPath: IndexPath)
-//}
 
 public class MusubiImagePicker {
     public static func show(from viewController: UIViewController, config: MusubiImagePickerConfiguration) {

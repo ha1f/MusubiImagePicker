@@ -9,6 +9,11 @@
 import UIKit
 import Photos
 
+protocol MusubiImagePickerDelegate: class {
+    func musubiImagePicker(didFinishPickingAssetsIn picker: MusubiImagePickerViewController, assets: [PHAsset])
+    func musubiImagePicker(didCancelPickingAssetsIn picker: MusubiImagePickerViewController)
+}
+
 class MusubiImagePickerViewController: UIViewController {
     
     @IBOutlet weak var selectAlbamView: UIView!
@@ -17,6 +22,9 @@ class MusubiImagePickerViewController: UIViewController {
     @IBOutlet var doneBarButtonItem: UIBarButtonItem!
     @IBOutlet var cancelBarButtonItem: UIBarButtonItem!
     
+    weak var delegate: MusubiImagePickerDelegate?
+    
+    // TODO: set properly
     var selectedAssets = [PHAsset]()
     
     override var title: String? {
@@ -90,11 +98,13 @@ class MusubiImagePickerViewController: UIViewController {
     
     @objc
     func onDonePickingAssets() {
+        delegate?.musubiImagePicker(didFinishPickingAssetsIn: self, assets: selectedAssets)
         self.dismiss(animated: true, completion: nil)
     }
     
     @objc
     func onCancelPickingAssets() {
+        delegate?.musubiImagePicker(didCancelPickingAssetsIn: self)
         self.dismiss(animated: true, completion: nil)
     }
 }
