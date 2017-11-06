@@ -11,13 +11,29 @@ import UIKit
 import Photos
 import PhotosUI
 
+protocol MusubiAssetGridViewControllerDelegate: class {
+    func assetGridViewController(didLongPressCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?)
+    func assetGridViewController(didSelectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?)
+    func assetGridViewController(didDeselectCellAt indexPath: IndexPath)
+}
+
+extension MusubiAssetGridViewControllerDelegate {
+    func assetGridViewController(didLongPressCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
+        
+    }
+    func assetGridViewController(didSelectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
+        
+    }
+    func assetGridViewController(didDeselectCellAt indexPath: IndexPath) {
+        
+    }
+}
+
 class MusubiAssetGridViewController: AssetGridViewController {
     @IBOutlet var doneButtonItem: UIBarButtonItem!
     @IBOutlet var cancelButtonItem: UIBarButtonItem!
     
-    var delegate: MusubiImagePickerDelegate? {
-        return config.delegate
-    }
+    weak var delegate: MusubiAssetGridViewControllerDelegate?
     
     var musubiImagePicker: MusubiImagePicker? {
         return self.parent?.navigationController as? MusubiImagePicker
@@ -68,15 +84,15 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // 完了ボタン
-        navigationItem.rightBarButtonItem = doneButtonItem
-        doneButtonItem.target = self
-        doneButtonItem.action = #selector(self.onFinishSelectingAssets)
-        
-        // キャンセルボタン
-        navigationItem.leftBarButtonItem = cancelButtonItem
-        cancelButtonItem.target = self
-        cancelButtonItem.action = #selector(self.onCancelPickingAssets)
+//        // 完了ボタン
+//        navigationItem.rightBarButtonItem = doneButtonItem
+//        doneButtonItem.target = self
+//        doneButtonItem.action = #selector(self.onFinishSelectingAssets)
+//
+//        // キャンセルボタン
+//        navigationItem.leftBarButtonItem = cancelButtonItem
+//        cancelButtonItem.target = self
+//        cancelButtonItem.action = #selector(self.onCancelPickingAssets)
     }
     
     // Asset詳細への遷移でindexPathを渡すようにしたので変更
@@ -97,31 +113,31 @@ class MusubiAssetGridViewController: AssetGridViewController {
         if recognizer.state == .began {
             let point = recognizer.location(in: recognizer.view)
             let indexPath = collectionView.indexPathForItem(at: point)!
-            self.performSegue(withIdentifier: "showAsset", sender: indexPath)
+            delegate?.assetGridViewController(didLongPressCellAt: indexPath, asset: fetchResult.object(at: indexPath.item), collection: assetCollection)
         }
     }
     
-    @objc func onCancelPickingAssets() {
-        guard let musubiImagePicker = musubiImagePicker else {
-            return
-        }
-        delegate?.didCancelPickingAssets?(picker: musubiImagePicker)
-    }
+//    @objc func onCancelPickingAssets() {
+//        guard let musubiImagePicker = musubiImagePicker else {
+//            return
+//        }
+//        delegate?.didCancelPickingAssets?(picker: musubiImagePicker)
+//    }
     
-    @objc func onFinishSelectingAssets() {
-        guard let musubiImagePicker = musubiImagePicker else {
-            return
-        }
-        let selectedAssets = fetchResult.objects(at: IndexSet(self.collectionView!.indexPathsForSelectedItems!.map { $0.item }))
-        delegate?.didFinishPickingAssets(picker: musubiImagePicker, selectedAssets: selectedAssets, assetCollection: assetCollection)
-    }
+//    @objc func onFinishSelectingAssets() {
+//        guard let musubiImagePicker = musubiImagePicker else {
+//            return
+//        }
+//        let selectedAssets = fetchResult.objects(at: IndexSet(self.collectionView!.indexPathsForSelectedItems!.map { $0.item }))
+//        delegate?.didFinishPickingAssets(picker: musubiImagePicker, selectedAssets: selectedAssets, assetCollection: assetCollection)
+//    }
     
     private func isCollectionViewCanSelect(_ collectionView: UICollectionView) -> Bool {
         return collectionView.indexPathsForSelectedItems?.count ?? 0 < (config.maxSelectionsCount - config.previouslySelectedAssetLocalIdentifiers.count)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectAssetAt?(indexPath: indexPath)
+        delegate?.assetGridViewController(didSelectCellAt: indexPath, asset: fetchResult.object(at: indexPath.item), collection: assetCollection)
         if !isCollectionViewCanSelect(collectionView) {
             collectionView.visibleCells
                 .filter{ cell in !cell.isSelected }
@@ -142,7 +158,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
                     cell.isUserInteractionEnabled = true
             }
         }
-        delegate?.didDeselectAssetAt?(indexPath: indexPath)
+        delegate?.assetGridViewController(didDeselectCellAt: indexPath)
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

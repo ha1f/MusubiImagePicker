@@ -16,7 +16,11 @@ class MusubiImagePickerViewController: UIViewController {
     
     override var title: String? {
         didSet {
-            (navigationItem.titleView as? UILabel)?.text = title
+            guard let label = navigationItem.titleView as? UILabel else {
+                return
+            }
+            label.text = title
+            label.sizeToFit()
         }
     }
     
@@ -34,6 +38,8 @@ class MusubiImagePickerViewController: UIViewController {
         setupTitleLabel()
         selectAlbamView.isHidden = true
         selectAlbamViewController?.delegate = self
+        
+        assetGridViewController?.delegate = self
         
         setResult()
     }
@@ -61,6 +67,17 @@ class MusubiImagePickerViewController: UIViewController {
     @objc
     func onTappedTitle(_ recognizer: UIGestureRecognizer) {
         selectAlbamView.isHidden = !selectAlbamView.isHidden
+    }
+}
+
+extension MusubiImagePickerViewController: MusubiAssetGridViewControllerDelegate {
+    func assetGridViewController(didLongPressCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
+        guard let viewController = UIStoryboard(name: "AssetViewController", bundle: Bundle.musubiImagePicker).instantiateInitialViewController() as? MusubiAssetViewController else {
+            return
+        }
+        viewController.asset = asset
+        viewController.assetCollection = collection
+        self.show(viewController, sender: nil)
     }
 }
 
