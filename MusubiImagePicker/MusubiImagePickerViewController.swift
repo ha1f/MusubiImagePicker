@@ -16,13 +16,18 @@ public class MusubiImagePickerViewController: UIViewController {
     
     @IBOutlet var doneBarButtonItem: UIBarButtonItem!
     @IBOutlet var cancelBarButtonItem: UIBarButtonItem!
+    @IBOutlet var deselectBarButtonItem: UIBarButtonItem!
     
     var config: MusubiImagePickerConfiguration = MusubiImagePickerConfiguration()
     
     weak var delegate: MusubiImagePickerDelegate?
     
     // TODO: set properly
-    var selectedLocalIdentifiers = [String]()
+    var selectedLocalIdentifiers = [String]() {
+        didSet {
+            deselectBarButtonItem.isEnabled = !selectedLocalIdentifiers.isEmpty
+        }
+    }
     
     override public var title: String? {
         didSet {
@@ -68,7 +73,13 @@ public class MusubiImagePickerViewController: UIViewController {
         // CANCEL
         cancelBarButtonItem.target = self
         cancelBarButtonItem.action = #selector(self.onCancelPickingAssets)
-        navigationItem.leftBarButtonItem = cancelBarButtonItem
+        
+        // DeselectAll
+        deselectBarButtonItem.target = self
+        deselectBarButtonItem.action = #selector(self.onDeselectAll)
+        navigationItem.leftBarButtonItems = [
+            cancelBarButtonItem, deselectBarButtonItem
+        ]
         
         navigationController?.isToolbarHidden = true
     }
@@ -96,6 +107,12 @@ public class MusubiImagePickerViewController: UIViewController {
     @objc
     func onTappedTitle(_ recognizer: UIGestureRecognizer) {
         selectAlbamView.isHidden = !selectAlbamView.isHidden
+    }
+    
+    @objc
+    func onDeselectAll() {
+        selectedLocalIdentifiers = []
+        assetGridViewController?.reloadCollectionView()
     }
     
     @objc

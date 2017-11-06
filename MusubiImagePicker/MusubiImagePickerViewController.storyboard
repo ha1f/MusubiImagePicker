@@ -47,6 +47,7 @@
                     <connections>
                         <outlet property="assetGridView" destination="Np6-nR-E2d" id="jcN-c1-L8k"/>
                         <outlet property="cancelBarButtonItem" destination="drj-w5-bQH" id="lLS-VM-GU9"/>
+                        <outlet property="deselectBarButtonItem" destination="edD-Pg-VCo" id="Sc3-6c-Ab1"/>
                         <outlet property="doneBarButtonItem" destination="tww-u4-xvj" id="y8n-yK-Mqt"/>
                         <outlet property="selectAlbamView" destination="QpM-rQ-70p" id="IXX-nv-Qvq"/>
                     </connections>
@@ -54,6 +55,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dL-y0-ZPP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem style="done" systemItem="done" id="tww-u4-xvj"/>
                 <barButtonItem systemItem="cancel" id="drj-w5-bQH"/>
+                <barButtonItem systemItem="refresh" id="edD-Pg-VCo"/>
             </objects>
             <point key="canvasLocation" x="183" y="198"/>
         </scene>
