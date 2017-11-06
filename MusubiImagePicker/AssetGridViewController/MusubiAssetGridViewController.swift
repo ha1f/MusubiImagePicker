@@ -124,7 +124,6 @@ class MusubiAssetGridViewController: AssetGridViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
         if let index = pickerViewController?.selectedLocalIdentifiers.index(where: { $0 == fetchResult.object(at: indexPath.item).localIdentifier }) {
-            // 含まれている
             // TODO: 数字を出す
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
             cell.isSelected = true

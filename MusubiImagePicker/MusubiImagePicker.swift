@@ -30,20 +30,41 @@ public struct MusubiImagePickerConfiguration {
 }
 
 public class MusubiImagePicker {
+    public static func present(from viewController: UIViewController, config: MusubiImagePickerConfiguration, delegate: MusubiImagePickerDelegate) {
+        tryInstanciate { picker in
+            guard let picker = picker else {
+                showAuthErrorDialog(from: viewController)
+                return
+            }
+            picker.delegate = delegate
+            picker.config = config
+            DispatchQueue.main.async {
+                let nav = UINavigationController(rootViewController: picker)
+                viewController.present(nav, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private static func showAuthErrorDialog(from viewController: UIViewController) {
+        let controller = UIAlertController(title: "アルバムへのアクセスが許可されていません", message: "設定を開きますか？", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
+            // do nothing
+        }
+        let settingAction = UIAlertAction(title: "設定", style: .default) { _ in
+            openSettings()
+        }
+        controller.addAction(cancelAction)
+        controller.addAction(settingAction)
+        
+        DispatchQueue.main.async {
+            viewController.present(controller, animated: true, completion: nil)
+        }
+    }
+    
     public static func show(from viewController: UIViewController, config: MusubiImagePickerConfiguration, delegate: MusubiImagePickerDelegate) {
         tryInstanciate { picker in
             guard let picker = picker else {
-                let controller = UIAlertController(title: "アルバムへのアクセスが許可されていません", message: "設定を開きますか？", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
-                    // do nothing
-                }
-                let settingAction = UIAlertAction(title: "設定", style: .default) { _ in
-                    openSettings()
-                }
-                controller.addAction(cancelAction)
-                controller.addAction(settingAction)
-                
-                viewController.present(controller, animated: true, completion: nil)
+                showAuthErrorDialog(from: viewController)
                 return
             }
             picker.delegate = delegate
@@ -94,6 +115,7 @@ public class MusubiImagePicker {
     }
     
     private static func instantiateFromStoryboard() -> MusubiImagePickerViewController? {
-        return UIStoryboard(name: "MusubiImagePickerViewController", bundle: Bundle.musubiImagePicker).instantiateInitialViewController() as? MusubiImagePickerViewController
+        return UIStoryboard(name: "MusubiImagePickerViewController", bundle: Bundle.musubiImagePicker)
+            .instantiateInitialViewController() as? MusubiImagePickerViewController
     }
 }

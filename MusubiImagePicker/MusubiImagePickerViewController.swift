@@ -22,7 +22,6 @@ public class MusubiImagePickerViewController: UIViewController {
     
     weak var delegate: MusubiImagePickerDelegate?
     
-    // TODO: set properly
     var selectedLocalIdentifiers = [String]() {
         didSet {
             deselectBarButtonItem.isEnabled = !selectedLocalIdentifiers.isEmpty
