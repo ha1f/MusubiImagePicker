@@ -17,6 +17,8 @@ class MusubiImagePickerViewController: UIViewController {
     @IBOutlet var doneBarButtonItem: UIBarButtonItem!
     @IBOutlet var cancelBarButtonItem: UIBarButtonItem!
     
+    var selectedAssets = [PHAsset]()
+    
     override var title: String? {
         didSet {
             guard let label = navigationItem.titleView as? UILabel else {

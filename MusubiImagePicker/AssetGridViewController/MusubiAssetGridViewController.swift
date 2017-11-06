@@ -55,7 +55,6 @@ class MusubiAssetGridViewController: AssetGridViewController {
         
         self.title = config.title
         
-        // 長押ししたら画像を開く
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.onCellPressedLong(_:)))
         collectionView?.addGestureRecognizer(gestureRecognizer)
         
@@ -68,7 +67,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     func setResultAllPhotos() {
         let options = PHFetchOptions()
-        options.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: false) ]
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         fetchResult = PHAsset.fetchAssets(with: options)
         assetCollection = nil
         self.collectionView?.reloadData()
@@ -76,7 +75,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     func setResult(with collection: PHAssetCollection) {
         let options = PHFetchOptions()
-        options.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: false) ]
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         fetchResult = PHAsset.fetchAssets(in: collection, options: options)
         assetCollection = collection
         self.collectionView?.reloadData()
