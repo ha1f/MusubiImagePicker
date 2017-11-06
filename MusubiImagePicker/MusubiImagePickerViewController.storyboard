@@ -13,7 +13,7 @@
         <!--Musubi Image Picker View Controller-->
         <scene sceneID="6Xl-vm-x9g">
             <objects>
-                <viewController id="JRr-ac-Nrx" customClass="MusubiImagePickerViewController" customModule="MusubiImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="JRr-ac-Nrx" customClass="MusubiImagePickerViewController" customModule="MusubiImagePicker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lXz-az-7xW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

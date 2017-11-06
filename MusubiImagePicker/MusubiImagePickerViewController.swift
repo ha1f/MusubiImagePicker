@@ -69,6 +69,8 @@ class MusubiImagePickerViewController: UIViewController {
         cancelBarButtonItem.target = self
         cancelBarButtonItem.action = #selector(self.onCancelPickingAssets)
         navigationItem.leftBarButtonItem = cancelBarButtonItem
+        
+        navigationController?.isToolbarHidden = true
     }
     
     private func setResult(with collection: PHAssetCollection? = nil) {
