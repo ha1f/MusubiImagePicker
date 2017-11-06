@@ -35,25 +35,10 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     weak var delegate: MusubiAssetGridViewControllerDelegate?
     
-    var musubiImagePicker: MusubiImagePicker? {
-        return self.parent?.navigationController as? MusubiImagePicker
-    }
-    
-    var config: MusubiImagePickerConfiguration {
-        set {
-            musubiImagePicker?.config = newValue
-        }
-        get {
-            return musubiImagePicker?.config ?? MusubiImagePickerConfiguration()
-        }
-    }
-    
-    var isSelectViewShowing: Bool = false
+    var config: MusubiImagePickerConfiguration = MusubiImagePickerConfiguration()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = config.title
         
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.onCellPressedLong(_:)))
         collectionView?.addGestureRecognizer(gestureRecognizer)

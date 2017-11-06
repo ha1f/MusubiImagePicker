@@ -23,7 +23,6 @@
 		848783E81DEDDF4A00BB7787 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848783E51DEDDF4A00BB7787 /* CheckBoxView.swift */; };
 		848783E91DEDDF4A00BB7787 /* MusubiAssetGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848783E61DEDDF4A00BB7787 /* MusubiAssetGridViewController.swift */; };
 		848783EA1DEDDF4A00BB7787 /* MusubiGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848783E71DEDDF4A00BB7787 /* MusubiGridViewCell.swift */; };
-		848783EE1DEDDF9C00BB7787 /* MusubiImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848783ED1DEDDF9C00BB7787 /* MusubiImagePicker.storyboard */; };
 		8487842A1DEDE22F00BB7787 /* MusubiImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848784291DEDE22F00BB7787 /* MusubiImagePicker.swift */; };
 		84B5EE091DEF379800FFEE1B /* MusubiAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B5EE081DEF379800FFEE1B /* MusubiAssetViewController.swift */; };
 /* End PBXBuildFile section */
@@ -47,7 +46,6 @@
 		848783E51DEDDF4A00BB7787 /* CheckBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		848783E61DEDDF4A00BB7787 /* MusubiAssetGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusubiAssetGridViewController.swift; sourceTree = "<group>"; };
 		848783E71DEDDF4A00BB7787 /* MusubiGridViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusubiGridViewCell.swift; sourceTree = "<group>"; };
-		848783ED1DEDDF9C00BB7787 /* MusubiImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusubiImagePicker.storyboard; sourceTree = "<group>"; };
 		848784291DEDE22F00BB7787 /* MusubiImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusubiImagePicker.swift; sourceTree = "<group>"; };
 		84B5EE081DEF379800FFEE1B /* MusubiAssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusubiAssetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,7 +130,6 @@
 				5694CDB71FB028F0002521C7 /* AssetGridViewController */,
 				5694CDB61FB028CC002521C7 /* AssetViewController */,
 				848783DE1DEDDEDC00BB7787 /* ExampleappusingPhotosframework */,
-				848783ED1DEDDF9C00BB7787 /* MusubiImagePicker.storyboard */,
 				5694CDB21FB00208002521C7 /* MusubiImagePickerViewController.storyboard */,
 				848784291DEDE22F00BB7787 /* MusubiImagePicker.swift */,
 				5694CDB01FB001DE002521C7 /* MusubiImagePickerViewController.swift */,
@@ -228,7 +225,6 @@
 				566B64781FAB198000625364 /* AssetViewController.storyboard in Resources */,
 				5694CDB31FB00208002521C7 /* MusubiImagePickerViewController.storyboard in Resources */,
 				5694CDB51FB00294002521C7 /* MusubiAssetGridViewController.storyboard in Resources */,
-				848783EE1DEDDF9C00BB7787 /* MusubiImagePicker.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,28 +15,43 @@ public struct MusubiImagePickerConfiguration {
     // 選択可能枚数（初期値は上限なし）
     public var maxSelectionsCount = Int.max
     // delegate
-    public weak var delegate: MusubiImagePickerDelegate?
+//    public weak var delegate: MusubiImagePickerDelegate?
     
-    /// Title shown on Navigation bar
-    public var title = ""
+    public init() {
+        
+    }
     
     public var isEditingEnabled = false
     public var isDeletingEnabled = false
     public var isFavoriteEnabled = false
 }
 
-@objc public protocol MusubiImagePickerDelegate: class {
-    func didFinishPickingAssets(picker: MusubiImagePicker, selectedAssets: [PHAsset], assetCollection: PHAssetCollection!)
-    @objc optional func didCancelPickingAssets(picker: MusubiImagePicker)
-    @objc optional func didSelectAssetAt(indexPath: IndexPath)
-    @objc optional func didDeselectAssetAt(indexPath: IndexPath)
-}
+//@objc public protocol MusubiImagePickerDelegate: class {
+//    func didFinishPickingAssets(picker: MusubiImagePicker, selectedAssets: [PHAsset], assetCollection: PHAssetCollection!)
+//    @objc optional func didCancelPickingAssets(picker: MusubiImagePicker)
+//    @objc optional func didSelectAssetAt(indexPath: IndexPath)
+//    @objc optional func didDeselectAssetAt(indexPath: IndexPath)
+//}
 
-public class MusubiImagePicker: UINavigationController {
-    public var config = MusubiImagePickerConfiguration()
-    
-    public static func instanciate(handler: @escaping (MusubiImagePicker?)->()) {
-        tryInstanciate(handler: handler)
+public class MusubiImagePicker {
+    public static func show(from viewController: UIViewController, config: MusubiImagePickerConfiguration) {
+        tryInstanciate { picker in
+            guard let picker = picker else {
+                return
+            }
+            DispatchQueue.main.async {
+                if let _ = viewController.navigationController {
+                    viewController.show(picker, sender: nil)
+                    return
+                }
+                if let nav = viewController as? UINavigationController {
+                    nav.show(picker, sender: nil)
+                    return
+                }
+                let nav = UINavigationController(rootViewController: picker)
+                viewController.show(nav, sender: nil)
+            }
+        }
     }
     
     public static func tryAuthorize(_ handler: @escaping (Bool) -> Void) {
@@ -53,7 +68,7 @@ public class MusubiImagePicker: UINavigationController {
         }
     }
     
-    private static func tryInstanciate(handler: @escaping (MusubiImagePicker?)->()) {
+    private static func tryInstanciate(handler: @escaping (MusubiImagePickerViewController?)->()) {
         tryAuthorize { isAuthorized in
             if isAuthorized {
                 handler(instantiateFromStoryboard())
@@ -63,7 +78,7 @@ public class MusubiImagePicker: UINavigationController {
         }
     }
     
-    private static func instantiateFromStoryboard() -> MusubiImagePicker? {
-        return UIStoryboard(name: "MusubiImagePicker", bundle: Bundle.musubiImagePicker).instantiateInitialViewController() as? MusubiImagePicker
+    private static func instantiateFromStoryboard() -> MusubiImagePickerViewController? {
+        return UIStoryboard(name: "MusubiImagePickerViewController", bundle: Bundle.musubiImagePicker).instantiateInitialViewController() as? MusubiImagePickerViewController
     }
 }
