@@ -42,6 +42,22 @@ class MusubiAssetGridViewController: AssetGridViewController {
         collectionView?.addGestureRecognizer(gestureRecognizer)
         
         collectionView?.allowsMultipleSelection = true
+        
+        if fetchResult == nil {
+            setResult()
+        }
+    }
+    
+    private func setResult(with collection: PHAssetCollection? = nil) {
+        let options = PHFetchOptions()
+        options.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: false) ]
+        if let collection = collection {
+            self.title = collection.localizedTitle ?? ""
+            fetchResult = PHAsset.fetchAssets(in: collection, options: options)
+        } else {
+            self.title = "All Photos"
+            fetchResult = PHAsset.fetchAssets(with: options)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

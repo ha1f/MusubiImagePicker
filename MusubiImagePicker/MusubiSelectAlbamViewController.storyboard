@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P2p-yr-OC3">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Musubi Select Albam View Controller-->
+        <scene sceneID="eG4-FE-vze">
+            <objects>
+                <viewController id="P2p-yr-OC3" customClass="MusubiSelectAlbamViewController" customModule="MusubiImagePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bRB-Fb-QIj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" estimatedRowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8ec-Mr-28K">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbamCell" rowHeight="72" id="Jax-Zo-y8x" customClass="AlbamCell" customModule="MusubiImagePicker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="72"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jax-Zo-y8x" id="h2n-Ae-sd7">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcG-Cb-gV6">
+                                                    <rect key="frame" x="25" y="16" width="300" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="300" id="X2M-eg-KUh"/>
+                                                        <constraint firstAttribute="height" constant="40" id="eYn-ce-6HE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="CcG-Cb-gV6" firstAttribute="leading" secondItem="h2n-Ae-sd7" secondAttribute="leadingMargin" constant="17" id="3Li-kS-GRk"/>
+                                                <constraint firstItem="CcG-Cb-gV6" firstAttribute="centerY" secondItem="h2n-Ae-sd7" secondAttribute="centerY" id="dGH-VD-3tL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="CcG-Cb-gV6" id="zqi-0k-p7S"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WtZ-4C-As1" firstAttribute="trailing" secondItem="8ec-Mr-28K" secondAttribute="trailing" id="2XD-OB-k3W"/>
+                            <constraint firstItem="WtZ-4C-As1" firstAttribute="leading" secondItem="8ec-Mr-28K" secondAttribute="leading" id="360-ce-Iof"/>
+                            <constraint firstAttribute="bottom" secondItem="8ec-Mr-28K" secondAttribute="bottom" id="hq1-j4-jCp"/>
+                            <constraint firstItem="WtZ-4C-As1" firstAttribute="top" secondItem="8ec-Mr-28K" secondAttribute="top" id="l79-ee-WtE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WtZ-4C-As1"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="8ec-Mr-28K" id="1jO-G7-bN3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X9U-ti-nQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="112.8" y="161.46926536731635"/>
+        </scene>
+    </scenes>
+</document>
