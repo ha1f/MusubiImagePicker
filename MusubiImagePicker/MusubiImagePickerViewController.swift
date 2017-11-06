@@ -14,6 +14,9 @@ class MusubiImagePickerViewController: UIViewController {
     @IBOutlet weak var selectAlbamView: UIView!
     @IBOutlet weak var assetGridView: UIView!
     
+    @IBOutlet var doneBarButtonItem: UIBarButtonItem!
+    @IBOutlet var cancelBarButtonItem: UIBarButtonItem!
+    
     override var title: String? {
         didSet {
             guard let label = navigationItem.titleView as? UILabel else {
@@ -44,6 +47,20 @@ class MusubiImagePickerViewController: UIViewController {
         setResult()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // DONE
+        doneBarButtonItem.target = self
+        doneBarButtonItem.action = #selector(self.onDonePickingAssets)
+        navigationItem.rightBarButtonItem = doneBarButtonItem
+        
+        // CANCEL
+        cancelBarButtonItem.target = self
+        cancelBarButtonItem.action = #selector(self.onCancelPickingAssets)
+        navigationItem.leftBarButtonItem = cancelBarButtonItem
+    }
+    
     private func setResult(with collection: PHAssetCollection? = nil) {
         if let collection = collection {
             self.title = collection.localizedTitle ?? "Albam"
@@ -67,6 +84,16 @@ class MusubiImagePickerViewController: UIViewController {
     @objc
     func onTappedTitle(_ recognizer: UIGestureRecognizer) {
         selectAlbamView.isHidden = !selectAlbamView.isHidden
+    }
+    
+    @objc
+    func onDonePickingAssets() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc
+    func onCancelPickingAssets() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

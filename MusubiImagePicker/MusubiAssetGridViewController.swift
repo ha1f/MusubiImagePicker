@@ -82,30 +82,6 @@ class MusubiAssetGridViewController: AssetGridViewController {
         self.collectionView?.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        // 完了ボタン
-//        navigationItem.rightBarButtonItem = doneButtonItem
-//        doneButtonItem.target = self
-//        doneButtonItem.action = #selector(self.onFinishSelectingAssets)
-//
-//        // キャンセルボタン
-//        navigationItem.leftBarButtonItem = cancelButtonItem
-//        cancelButtonItem.target = self
-//        cancelButtonItem.action = #selector(self.onCancelPickingAssets)
-    }
-    
-    // Asset詳細への遷移でindexPathを渡すようにしたので変更
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? MusubiAssetViewController else {
-            assertionFailure("unexpected view controller for segue")
-            return
-        }
-        let indexPath = sender as! IndexPath
-        destination.asset = fetchResult.object(at: indexPath.item)
-        destination.assetCollection = assetCollection
-    }
-    
     @objc func onCellPressedLong(_ recognizer: UILongPressGestureRecognizer) {
         guard let collectionView = self.collectionView, recognizer.view == collectionView else {
             return
