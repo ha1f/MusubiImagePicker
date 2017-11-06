@@ -9,12 +9,7 @@
 import UIKit
 import Photos
 
-protocol MusubiImagePickerDelegate: class {
-    func musubiImagePicker(didFinishPickingAssetsIn picker: MusubiImagePickerViewController, assets: [PHAsset])
-    func musubiImagePicker(didCancelPickingAssetsIn picker: MusubiImagePickerViewController)
-}
-
-class MusubiImagePickerViewController: UIViewController {
+public class MusubiImagePickerViewController: UIViewController {
     
     @IBOutlet weak var selectAlbamView: UIView!
     @IBOutlet weak var assetGridView: UIView!
@@ -22,12 +17,14 @@ class MusubiImagePickerViewController: UIViewController {
     @IBOutlet var doneBarButtonItem: UIBarButtonItem!
     @IBOutlet var cancelBarButtonItem: UIBarButtonItem!
     
+    var config: MusubiImagePickerConfiguration = MusubiImagePickerConfiguration()
+    
     weak var delegate: MusubiImagePickerDelegate?
     
     // TODO: set properly
-    var selectedAssets = [PHAsset]()
+    var selectedLocalIdentifiers = [String]()
     
-    override var title: String? {
+    override public var title: String? {
         didSet {
             guard let label = navigationItem.titleView as? UILabel else {
                 return
@@ -45,19 +42,22 @@ class MusubiImagePickerViewController: UIViewController {
         return self.childViewControllers.flatMap { $0 as? MusubiSelectAlbamViewController }.first
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        selectedLocalIdentifiers = config.previouslySelectedAssetLocalIdentifiers
         
         setupTitleLabel()
         selectAlbamView.isHidden = true
         selectAlbamViewController?.delegate = self
         
         assetGridViewController?.delegate = self
+        assetGridViewController?.pickerViewController = self
         
         setResult()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // DONE
@@ -100,7 +100,7 @@ class MusubiImagePickerViewController: UIViewController {
     
     @objc
     func onDonePickingAssets() {
-        delegate?.musubiImagePicker(didFinishPickingAssetsIn: self, assets: selectedAssets)
+        delegate?.musubiImagePicker(didFinishPickingAssetsIn: self, assets: selectedLocalIdentifiers)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -119,6 +119,16 @@ extension MusubiImagePickerViewController: MusubiAssetGridViewControllerDelegate
         viewController.asset = asset
         viewController.assetCollection = collection
         self.show(viewController, sender: nil)
+    }
+    func assetGridViewController(didSelectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
+        selectedLocalIdentifiers.append(asset.localIdentifier)
+        print("selected", selectedLocalIdentifiers)
+    }
+    func assetGridViewController(didDeselectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
+        if let removeIndex = selectedLocalIdentifiers.index(where: { $0 == asset.localIdentifier  }) {
+            selectedLocalIdentifiers.remove(at: removeIndex)
+            print("deselected", selectedLocalIdentifiers)
+        }
     }
 }
 

@@ -9,6 +9,11 @@
 import UIKit
 import Photos
 
+public protocol MusubiImagePickerDelegate: class {
+    func musubiImagePicker(didFinishPickingAssetsIn picker: MusubiImagePickerViewController, assets: [String])
+    func musubiImagePicker(didCancelPickingAssetsIn picker: MusubiImagePickerViewController)
+}
+
 public struct MusubiImagePickerConfiguration {
     // すでに選択されているAssetのlocalIdentifierを渡しておける
     public var previouslySelectedAssetLocalIdentifiers = [String]()
@@ -25,7 +30,7 @@ public struct MusubiImagePickerConfiguration {
 }
 
 public class MusubiImagePicker {
-    public static func show(from viewController: UIViewController, config: MusubiImagePickerConfiguration) {
+    public static func show(from viewController: UIViewController, config: MusubiImagePickerConfiguration, delegate: MusubiImagePickerDelegate) {
         tryInstanciate { picker in
             guard let picker = picker else {
                 let controller = UIAlertController(title: "アルバムへのアクセスが許可されていません", message: "設定を開きますか？", preferredStyle: .alert)
@@ -41,6 +46,8 @@ public class MusubiImagePicker {
                 viewController.present(controller, animated: true, completion: nil)
                 return
             }
+            picker.delegate = delegate
+            picker.config = config
             DispatchQueue.main.async {
                 if let _ = viewController.navigationController {
                     viewController.show(picker, sender: nil)

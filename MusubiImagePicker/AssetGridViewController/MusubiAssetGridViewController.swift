@@ -14,7 +14,7 @@ import PhotosUI
 protocol MusubiAssetGridViewControllerDelegate: class {
     func assetGridViewController(didLongPressCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?)
     func assetGridViewController(didSelectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?)
-    func assetGridViewController(didDeselectCellAt indexPath: IndexPath)
+    func assetGridViewController(didDeselectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?)
 }
 
 extension MusubiAssetGridViewControllerDelegate {
@@ -24,7 +24,7 @@ extension MusubiAssetGridViewControllerDelegate {
     func assetGridViewController(didSelectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
         
     }
-    func assetGridViewController(didDeselectCellAt indexPath: IndexPath) {
+    func assetGridViewController(didDeselectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
         
     }
 }
@@ -33,9 +33,12 @@ class MusubiAssetGridViewController: AssetGridViewController {
     @IBOutlet var doneButtonItem: UIBarButtonItem!
     @IBOutlet var cancelButtonItem: UIBarButtonItem!
     
+    weak var pickerViewController: MusubiImagePickerViewController?
     weak var delegate: MusubiAssetGridViewControllerDelegate?
     
-    var config: MusubiImagePickerConfiguration = MusubiImagePickerConfiguration()
+    var config: MusubiImagePickerConfiguration {
+        return pickerViewController?.config ?? MusubiImagePickerConfiguration()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +58,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         fetchResult = PHAsset.fetchAssets(with: options)
         assetCollection = nil
-        self.collectionView?.reloadData()
+        reloadCollectionView()
     }
     
     func setResult(with collection: PHAssetCollection) {
@@ -63,6 +66,10 @@ class MusubiAssetGridViewController: AssetGridViewController {
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         fetchResult = PHAsset.fetchAssets(in: collection, options: options)
         assetCollection = collection
+        reloadCollectionView()
+    }
+    
+    func reloadCollectionView() {
         self.collectionView?.reloadData()
     }
     
@@ -80,7 +87,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
     // MARK: - UICollectionView
     
     private func isCollectionViewCanSelect(_ collectionView: UICollectionView) -> Bool {
-        return collectionView.indexPathsForSelectedItems?.count ?? 0 < (config.maxSelectionsCount - config.previouslySelectedAssetLocalIdentifiers.count)
+        return (pickerViewController?.selectedLocalIdentifiers.count ?? 0) < config.maxSelectionsCount
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -95,17 +102,13 @@ class MusubiAssetGridViewController: AssetGridViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if let index = config.previouslySelectedAssetLocalIdentifiers.index(of: fetchResult.object(at: indexPath.item).localIdentifier) {
-            config.previouslySelectedAssetLocalIdentifiers.remove(at: index)
-        }
-        
+        delegate?.assetGridViewController(didDeselectCellAt: indexPath, asset: fetchResult.object(at: indexPath.item), collection: assetCollection)
         if isCollectionViewCanSelect(collectionView) {
             collectionView.visibleCells
                 .forEach { cell in
                     cell.isUserInteractionEnabled = true
             }
         }
-        delegate?.assetGridViewController(didDeselectCellAt: indexPath)
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -116,11 +119,11 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
-        if let index = config.previouslySelectedAssetLocalIdentifiers.index(of: fetchResult.object(at: indexPath.item).localIdentifier) {
+        if let index = pickerViewController?.selectedLocalIdentifiers.index(where: { $0 == fetchResult.object(at: indexPath.item).localIdentifier }) {
             // 含まれている
+            // TODO: 数字を出す
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
             cell.isSelected = true
-            config.previouslySelectedAssetLocalIdentifiers.remove(at: index)
         }
         return cell
     }
