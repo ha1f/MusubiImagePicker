@@ -28,22 +28,22 @@ struct CheckBoxViewColors {
 /// 参考：http://mashiroyuya.hatenablog.com/entry/2016/03/01/131211
 class CheckBoxView: UIView {
     
-    var isActive = false {
+    var indexOfSelection: Int? {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    convenience init(frame: CGRect, isActive: Bool) {
+    convenience init(frame: CGRect, indexOfSelection: Int? = nil) {
         self.init(frame: frame)
-        self.isActive = isActive
+        self.indexOfSelection = indexOfSelection
         self.backgroundColor = UIColor.clear
     }
     
     override func draw(_ rect: CGRect) {
         let checkMarkRect = CGRect(x: 5, y: 5, width: rect.width - 10, height: rect.height - 10)
         
-        let checkBoxViewColors = isActive ? CheckBoxViewColors.defaultActiveColor : CheckBoxViewColors.defaultNegativeColor
+        let checkBoxViewColors = indexOfSelection != nil ? CheckBoxViewColors.defaultActiveColor : CheckBoxViewColors.defaultNegativeColor
         
         // Draw Circle
         let oval = UIBezierPath(ovalIn: checkMarkRect)

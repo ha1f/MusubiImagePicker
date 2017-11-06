@@ -69,9 +69,14 @@ class MusubiAssetGridViewController: AssetGridViewController {
         collectionView?.reloadData()
     }
     
+    func reloadSelectedCells(additionalIndexPaths: [IndexPath] = []) {
+        if let indexPaths = collectionView?.indexPathsForSelectedItems {
+            collectionView?.reloadItems(at: indexPaths + additionalIndexPaths)
+        }
+    }
+    
     func reloadWithAnimation() {
         if let indexPaths = collectionView?.indexPathsForVisibleItems {
-            print(indexPaths)
             collectionView?.reloadItems(at: indexPaths)
         }
         collectionView?.reloadData()
@@ -96,6 +101,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.assetGridViewController(didSelectCellAt: indexPath, asset: fetchResult.object(at: indexPath.item), collection: assetCollection)
+        reloadSelectedCells()
         if !isCollectionViewCanSelect(collectionView) {
             collectionView.visibleCells
                 .filter{ cell in !cell.isSelected }
@@ -107,6 +113,10 @@ class MusubiAssetGridViewController: AssetGridViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         delegate?.assetGridViewController(didDeselectCellAt: indexPath, asset: fetchResult.object(at: indexPath.item), collection: assetCollection)
+        // 今解除されたものと、既に選択されたものをリロード
+        reloadSelectedCells(additionalIndexPaths: [indexPath])
+        
+        // 選択できるなら選択できるように更新
         if isCollectionViewCanSelect(collectionView) {
             collectionView.visibleCells
                 .forEach { cell in
@@ -125,8 +135,11 @@ class MusubiAssetGridViewController: AssetGridViewController {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
         if let index = pickerViewController?.selectedLocalIdentifiers.index(where: { $0 == fetchResult.object(at: indexPath.item).localIdentifier }) {
             // TODO: 数字を出す
+            (cell as? MusubiGridViewCell)?.indexOfSelection = index
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
             cell.isSelected = true
+        } else {
+            (cell as? MusubiGridViewCell)?.indexOfSelection = nil
         }
         return cell
     }

@@ -14,8 +14,17 @@ class MusubiGridViewCell: GridViewCell {
     static let whiteLayerColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.7)
     
     private lazy var checkBoxView: CheckBoxView = {
-        return CheckBoxView(frame: CGRect.zero, isActive: true)
+        return CheckBoxView(frame: CGRect.zero, indexOfSelection: 0)
     }()
+    
+    var indexOfSelection: Int? {
+        set {
+            checkBoxView.indexOfSelection = newValue
+        }
+        get {
+            return checkBoxView.indexOfSelection
+        }
+    }
     
     private var whiteLayer: CALayer?
     
@@ -80,7 +89,6 @@ class MusubiGridViewCell: GridViewCell {
     }
     
     private func _updateCheckbox() {
-        checkBoxView.isActive = isSelected
         checkBoxView.isHidden = !isSelected
     }
     
