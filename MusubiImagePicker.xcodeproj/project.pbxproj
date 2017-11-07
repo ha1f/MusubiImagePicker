@@ -37,6 +37,7 @@
 		5694CDB01FB001DE002521C7 /* MusubiImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusubiImagePickerViewController.swift; sourceTree = "<group>"; };
 		5694CDB21FB00208002521C7 /* MusubiImagePickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MusubiImagePickerViewController.storyboard; sourceTree = "<group>"; };
 		5694CDB41FB00294002521C7 /* MusubiAssetGridViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusubiAssetGridViewController.storyboard; sourceTree = "<group>"; };
+		56B91D9B1FB1750300B3512A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		848783D21DEDDE7000BB7787 /* MusubiImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusubiImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		848783D51DEDDE7000BB7787 /* MusubiImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiImagePicker.h; sourceTree = "<group>"; };
 		848783D61DEDDE7000BB7787 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,6 +110,7 @@
 		848783C81DEDDE7000BB7787 = {
 			isa = PBXGroup;
 			children = (
+				56B91D9B1FB1750300B3512A /* README.md */,
 				848783D41DEDDE7000BB7787 /* MusubiImagePicker */,
 				848783D31DEDDE7000BB7787 /* Products */,
 			);

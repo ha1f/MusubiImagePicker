@@ -22,6 +22,33 @@ public class MusubiImagePickerViewController: UIViewController {
     
     weak var delegate: MusubiImagePickerDelegate?
     
+    var isSelectAlbamViewHidden: Bool = true {
+        didSet {
+            selectAlbamView.isHidden = false
+            if oldValue != isSelectAlbamViewHidden {
+                // 変化時はアニメーション
+                UIView.animate(withDuration: 0.3) { [weak self] in
+                    guard let unwrappedSelf = self else {
+                        return
+                    }
+                    if unwrappedSelf.isSelectAlbamViewHidden {
+                        unwrappedSelf.selectAlbamView.transform = CGAffineTransform(translationX: 0, y: -unwrappedSelf.selectAlbamView.frame.height)
+                    } else {
+                        unwrappedSelf.selectAlbamView.transform = CGAffineTransform.identity
+                    }
+                }
+            } else {
+                if isSelectAlbamViewHidden {
+                    selectAlbamView.isHidden = true
+                    selectAlbamView.transform = CGAffineTransform(translationX: 0, y: -selectAlbamView.frame.height)
+                } else {
+                    selectAlbamView.transform = CGAffineTransform.identity
+                }
+            }
+            updateTitle()
+        }
+    }
+    
     var selectedLocalIdentifiers = [String]() {
         didSet {
             deselectBarButtonItem.isEnabled = !selectedLocalIdentifiers.isEmpty
@@ -46,11 +73,15 @@ public class MusubiImagePickerViewController: UIViewController {
         }
     }
     
+    private var collapseMark: String {
+        return isSelectAlbamViewHidden ? "▼" : "▲"
+    }
+    
     private func updateTitle() {
         if selectedLocalIdentifiers.isEmpty {
-            self.title = "\(albamTitle)"
+            self.title = "\(albamTitle)\(collapseMark)"
         } else {
-            self.title = "\(albamTitle)\n\(selectedLocalIdentifiers.count)件選択中"
+            self.title = "\(albamTitle)\(collapseMark)\n\(selectedLocalIdentifiers.count)件選択中"
         }
     }
     
@@ -68,7 +99,7 @@ public class MusubiImagePickerViewController: UIViewController {
         selectedLocalIdentifiers = config.previouslySelectedAssetLocalIdentifiers
         
         setupTitleLabel()
-        selectAlbamView.isHidden = true
+        isSelectAlbamViewHidden = true
         selectAlbamViewController?.delegate = self
         
         assetGridViewController?.delegate = self
@@ -121,7 +152,8 @@ public class MusubiImagePickerViewController: UIViewController {
     
     @objc
     func onTappedTitle(_ recognizer: UIGestureRecognizer) {
-        selectAlbamView.isHidden = !selectAlbamView.isHidden
+        isSelectAlbamViewHidden = !isSelectAlbamViewHidden
+        updateTitle()
     }
     
     @objc
@@ -154,12 +186,10 @@ extension MusubiImagePickerViewController: MusubiAssetGridViewControllerDelegate
     }
     func assetGridViewController(didSelectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
         selectedLocalIdentifiers.append(asset.localIdentifier)
-        print("selected", selectedLocalIdentifiers)
     }
     func assetGridViewController(didDeselectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
         if let removeIndex = selectedLocalIdentifiers.index(where: { $0 == asset.localIdentifier  }) {
             selectedLocalIdentifiers.remove(at: removeIndex)
-            print("deselected", selectedLocalIdentifiers)
         }
     }
 }
@@ -167,6 +197,6 @@ extension MusubiImagePickerViewController: MusubiAssetGridViewControllerDelegate
 extension MusubiImagePickerViewController: MusubiSelectAlbamViewControllerDelegate {
     func selectAlbamViewController(didSelect collection: PHAssetCollection?) {
         setResult(with: collection)
-        selectAlbamView.isHidden = true
+        isSelectAlbamViewHidden = true
     }
 }
