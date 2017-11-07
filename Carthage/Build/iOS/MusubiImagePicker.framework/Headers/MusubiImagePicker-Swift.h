@@ -174,6 +174,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_feature(modules)
 @import Foundation;
 @import UIKit;
+@import CoreGraphics;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -204,6 +205,12 @@ SWIFT_CLASS("_TtC17MusubiImagePicker31MusubiImagePickerViewController")
 
 
 
+
+
+@interface UICollectionView (SWIFT_EXTENSION(MusubiImagePicker))
+- (void)adaptBeautifulGridWithNumberOfGridsPerRow:(NSInteger)numberOfGridsPerRow gridLineSpace:(CGFloat)space SWIFT_DEPRECATED_OBJC("Swift method 'UICollectionView.adaptBeautifulGrid(numberOfGridsPerRow:gridLineSpace:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+- (void)adaptBeautifulGridWithNumberOfGridsPerRow:(NSInteger)numberOfGridsPerRow gridLineSpace:(CGFloat)space sectionInset:(UIEdgeInsets)inset SWIFT_DEPRECATED_OBJC("Swift method 'UICollectionView.adaptBeautifulGrid(numberOfGridsPerRow:gridLineSpace:sectionInset:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@end
 
 SWIFT_MODULE_NAMESPACE_POP
 #pragma clang diagnostic pop
