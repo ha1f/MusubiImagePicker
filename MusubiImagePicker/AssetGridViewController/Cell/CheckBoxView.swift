@@ -15,7 +15,7 @@ struct CheckBoxViewColors {
     
     static let defaultActiveColor = CheckBoxViewColors(
         ovalColor: UIColor(red: 85/255, green: 185/255, blue: 1/255, alpha: 0.8),
-        ovalFrameColor: UIColor.black,
+        ovalFrameColor: UIColor.white,
         checkColor: UIColor.white
     )
     static let defaultNegativeColor = CheckBoxViewColors(
@@ -53,21 +53,18 @@ class CheckBoxView: UIView {
         oval.lineWidth = 2
         oval.stroke()
         
-        // Draw checkmark
-        let startPoint = CGPoint(x: checkMarkRect.origin.x + checkMarkRect.width / 6,
-                                 y: checkMarkRect.origin.y + checkMarkRect.height / 2)
-        let turnPoint = CGPoint(x: checkMarkRect.origin.x + checkMarkRect.width / 3,
-                                y: checkMarkRect.origin.y + checkMarkRect.height * 7 / 10)
-        let endPoint = CGPoint(x: checkMarkRect.origin.x + checkMarkRect.width * 5 / 6,
-                               y: checkMarkRect.origin.y + checkMarkRect.height * 1 / 3)
-        
-        let checkmark = UIBezierPath()
-        checkmark.move(to: startPoint)
-        checkmark.addLine(to: turnPoint)
-        checkmark.addLine(to: endPoint)
-        
-        checkBoxViewColors.checkColor.setStroke()
-        checkmark.lineWidth = 5
-        checkmark.stroke()
+        if let number = indexOfSelection {
+            let nsstring = "\(number + 1)" as NSString
+            let fontSize = min(rect.width, rect.height) - 16
+            let attributes: [NSAttributedStringKey: Any] = [
+                .font: UIFont.systemFont(ofSize: fontSize),
+                .foregroundColor: checkBoxViewColors.checkColor,
+                .paragraphStyle: NSMutableParagraphStyle.default
+            ]
+            let size = nsstring.size(withAttributes: attributes)
+            let point = CGPoint(x: checkMarkRect.origin.x + (checkMarkRect.width - size.width) / 2,
+                                y: checkMarkRect.origin.y + (checkMarkRect.height - size.height) / 2)
+            nsstring.draw(at: point, withAttributes: attributes)
+        }
     }
 }

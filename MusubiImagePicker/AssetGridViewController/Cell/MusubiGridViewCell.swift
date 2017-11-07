@@ -84,6 +84,13 @@ class MusubiGridViewCell: GridViewCell {
                             }
                     })
                 }
+            } else {
+                // 変化なくても値だけセット
+                if isSelected {
+                    imageView?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                } else {
+                    imageView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }
             }
         }
     }
