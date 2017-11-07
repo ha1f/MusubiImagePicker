@@ -172,8 +172,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
-@import UIKit;
 @import Foundation;
+@import UIKit;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -185,30 +185,23 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Wnullability"
 
 SWIFT_MODULE_NAMESPACE_PUSH("MusubiImagePicker")
-@class UIViewController;
-@class NSBundle;
+
+
 @class NSCoder;
 
-SWIFT_CLASS("_TtC17MusubiImagePicker17MusubiImagePicker")
-@interface MusubiImagePicker : UINavigationController
-+ (void)instanciateWithHandler:(void (^ _Nonnull)(MusubiImagePicker * _Nullable))handler SWIFT_DEPRECATED_OBJC("Swift method 'MusubiImagePicker.instanciate(handler:)' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
-- (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=5.0);
-- (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController OBJC_DESIGNATED_INITIALIZER;
+SWIFT_CLASS("_TtC17MusubiImagePicker31MusubiImagePickerViewController")
+@interface MusubiImagePickerViewController : UIViewController
+@property (nonatomic, copy) NSString * _Nonnull albamTitle SWIFT_DEPRECATED_OBJC("Swift property 'MusubiImagePickerViewController.albamTitle' uses '@objc' inference deprecated in Swift 4; add '@objc' to provide an Objective-C entrypoint");
+@property (nonatomic, copy) NSString * _Nullable title;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class PHAsset;
-@class PHAssetCollection;
 
-SWIFT_PROTOCOL("_TtP17MusubiImagePicker25MusubiImagePickerDelegate_")
-@protocol MusubiImagePickerDelegate
-- (void)didFinishPickingAssetsWithPicker:(MusubiImagePicker * _Nonnull)picker selectedAssets:(NSArray<PHAsset *> * _Nonnull)selectedAssets assetCollection:(PHAssetCollection * _Null_unspecified)assetCollection;
-@optional
-- (void)didCancelPickingAssetsWithPicker:(MusubiImagePicker * _Nonnull)picker;
-- (void)didSelectAssetAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
-- (void)didDeselectAssetAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
-@end
+
+
 
 
 
