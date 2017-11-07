@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Np6-nR-E2d">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="0vX-1F-CKz" kind="embed" id="jOL-HX-NIW"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QpM-rQ-70p">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="740-Yh-1cw" kind="embed" id="0sM-fp-MqU"/>
                                 </connections>
@@ -39,8 +39,8 @@
                             <constraint firstItem="QpM-rQ-70p" firstAttribute="trailing" secondItem="keW-OW-Psw" secondAttribute="trailing" id="iSI-cb-gOU"/>
                             <constraint firstItem="Np6-nR-E2d" firstAttribute="leading" secondItem="keW-OW-Psw" secondAttribute="leading" id="lOW-ue-Wob"/>
                             <constraint firstItem="Np6-nR-E2d" firstAttribute="bottom" secondItem="lXz-az-7xW" secondAttribute="bottom" id="qvv-m8-obc"/>
-                            <constraint firstItem="Np6-nR-E2d" firstAttribute="top" secondItem="keW-OW-Psw" secondAttribute="top" id="woP-6Q-16E"/>
-                            <constraint firstItem="QpM-rQ-70p" firstAttribute="top" secondItem="keW-OW-Psw" secondAttribute="top" id="xSz-yW-nfu"/>
+                            <constraint firstItem="Np6-nR-E2d" firstAttribute="top" secondItem="lXz-az-7xW" secondAttribute="top" id="woP-6Q-16E"/>
+                            <constraint firstItem="QpM-rQ-70p" firstAttribute="top" secondItem="lXz-az-7xW" secondAttribute="top" id="xSz-yW-nfu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="keW-OW-Psw"/>
                     </view>

@@ -14,6 +14,15 @@ public protocol MusubiImagePickerDelegate: class {
     func musubiImagePicker(didCancelPickingAssetsIn picker: MusubiImagePickerViewController)
 }
 
+extension MusubiImagePickerDelegate {
+    func musubiImagePicker(didFinishPickingAssetsIn picker: MusubiImagePickerViewController, assets: [String]) {
+        
+    }
+    func musubiImagePicker(didCancelPickingAssetsIn picker: MusubiImagePickerViewController) {
+        
+    }
+}
+
 public struct MusubiImagePickerConfiguration {
     // すでに選択されているAssetのlocalIdentifierを渡しておける
     public var previouslySelectedAssetLocalIdentifiers = [String]()

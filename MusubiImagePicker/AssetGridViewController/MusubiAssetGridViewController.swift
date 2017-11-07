@@ -53,6 +53,11 @@ class MusubiAssetGridViewController: AssetGridViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView?.adaptBeautifulGrid(numberOfGridsPerRow: 3, gridLineSpace: 1)
+    }
+    
     func setResultAllPhotos() {
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -70,8 +75,11 @@ class MusubiAssetGridViewController: AssetGridViewController {
     }
     
     func reloadSelectedCells(additionalIndexPaths: [IndexPath] = []) {
-        if let indexPaths = collectionView?.indexPathsForSelectedItems {
-            collectionView?.reloadItems(at: indexPaths + additionalIndexPaths)
+        guard let collectionView = collectionView else {
+            return
+        }
+        if let indexPaths = collectionView.indexPathsForSelectedItems {
+            collectionView.reloadItems(at: indexPaths)
         }
     }
     
@@ -102,12 +110,25 @@ class MusubiAssetGridViewController: AssetGridViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.assetGridViewController(didSelectCellAt: indexPath, asset: fetchResult.object(at: indexPath.item), collection: assetCollection)
         reloadSelectedCells()
+        disableUserInteractionIfNeed(collectionView)
+    }
+    
+    private func disableUserInteractionIfNeed(_ collectionView: UICollectionView) {
         if !isCollectionViewCanSelect(collectionView) {
             collectionView.visibleCells
                 .filter{ cell in !cell.isSelected }
                 .forEach { cell in
                     cell.isUserInteractionEnabled = false
-                }
+            }
+        }
+    }
+    
+    private func enableUserInteractionIfNeed(_ collectionView: UICollectionView) {
+        if isCollectionViewCanSelect(collectionView) {
+            collectionView.visibleCells
+                .forEach { cell in
+                    cell.isUserInteractionEnabled = true
+            }
         }
     }
     
@@ -117,12 +138,7 @@ class MusubiAssetGridViewController: AssetGridViewController {
         reloadSelectedCells(additionalIndexPaths: [indexPath])
         
         // 選択できるなら選択できるように更新
-        if isCollectionViewCanSelect(collectionView) {
-            collectionView.visibleCells
-                .forEach { cell in
-                    cell.isUserInteractionEnabled = true
-            }
-        }
+        enableUserInteractionIfNeed(collectionView)
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -134,9 +150,8 @@ class MusubiAssetGridViewController: AssetGridViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
         if let index = pickerViewController?.selectedLocalIdentifiers.index(where: { $0 == fetchResult.object(at: indexPath.item).localIdentifier }) {
-            // TODO: 数字を出す
             (cell as? MusubiGridViewCell)?.indexOfSelection = index
-            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
             cell.isSelected = true
         } else {
             (cell as? MusubiGridViewCell)?.indexOfSelection = nil
@@ -158,53 +173,4 @@ class MusubiAssetGridViewController: AssetGridViewController {
 //            }
 //        }
 //    }
-}
-
-extension MusubiAssetGridViewController: UICollectionViewDelegateFlowLayout {
-    // MARK: UICollectionViewDelegateFlowLayout
-    // 横に並ぶセルの数
-    static let HORIZONTAL_CELLS_COUNT: CGFloat = 3
-    // セルの間隔
-    static let CELLS_MARGIN: CGFloat = 1
-    // 周りの余白
-    static let edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    
-    // TODO: パフォーマンス改善したい
-    fileprivate var cellSize: CGSize {
-        let space = type(of: self).CELLS_MARGIN
-        
-        var boundSize = collectionView!.bounds.size
-        boundSize.width -= collectionView!.contentInset.left - collectionView!.contentInset.right
-        boundSize.height -= collectionView!.contentInset.top - collectionView!.contentInset.bottom
-        
-        let contentWidth: CGFloat
-        if let direction = (collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection, direction == .horizontal {
-            // 横スクロールなら縦並びのセル数として計算
-            contentWidth = boundSize.height - MusubiAssetGridViewController.edgeInsets.top - MusubiAssetGridViewController.edgeInsets.bottom
-        } else {
-            contentWidth = boundSize.width - MusubiAssetGridViewController.edgeInsets.right - MusubiAssetGridViewController.edgeInsets.left
-        }
-        
-        let cellLength = (contentWidth - space * (type(of: self).HORIZONTAL_CELLS_COUNT-1)) / type(of: self).HORIZONTAL_CELLS_COUNT
-        
-        return CGSize(width: cellLength, height: cellLength)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return cellSize
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return MusubiAssetGridViewController.edgeInsets
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        let space = type(of: self).CELLS_MARGIN
-        return space
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        let space = type(of: self).CELLS_MARGIN
-        return space
-    }
 }

@@ -16,6 +16,7 @@
 		5694CDB11FB001DE002521C7 /* MusubiImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5694CDB01FB001DE002521C7 /* MusubiImagePickerViewController.swift */; };
 		5694CDB31FB00208002521C7 /* MusubiImagePickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5694CDB21FB00208002521C7 /* MusubiImagePickerViewController.storyboard */; };
 		5694CDB51FB00294002521C7 /* MusubiAssetGridViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5694CDB41FB00294002521C7 /* MusubiAssetGridViewController.storyboard */; };
+		56B91D9E1FB1AA9C00B3512A /* BeautifulGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91D9D1FB1AA9C00B3512A /* BeautifulGridLayout.swift */; };
 		848783D71DEDDE7000BB7787 /* MusubiImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 848783D51DEDDE7000BB7787 /* MusubiImagePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		848783E01DEDDF0300BB7787 /* AssetGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848783DF1DEDDF0300BB7787 /* AssetGridViewController.swift */; };
 		848783E21DEDDF0C00BB7787 /* AssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848783E11DEDDF0C00BB7787 /* AssetViewController.swift */; };
@@ -38,6 +39,7 @@
 		5694CDB21FB00208002521C7 /* MusubiImagePickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MusubiImagePickerViewController.storyboard; sourceTree = "<group>"; };
 		5694CDB41FB00294002521C7 /* MusubiAssetGridViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusubiAssetGridViewController.storyboard; sourceTree = "<group>"; };
 		56B91D9B1FB1750300B3512A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		56B91D9D1FB1AA9C00B3512A /* BeautifulGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeautifulGridLayout.swift; sourceTree = "<group>"; };
 		848783D21DEDDE7000BB7787 /* MusubiImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusubiImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		848783D51DEDDE7000BB7787 /* MusubiImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusubiImagePicker.h; sourceTree = "<group>"; };
 		848783D61DEDDE7000BB7787 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				5694CDAE1FAFFF6E002521C7 /* Util.swift */,
+				56B91D9D1FB1AA9C00B3512A /* BeautifulGridLayout.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				84B5EE091DEF379800FFEE1B /* MusubiAssetViewController.swift in Sources */,
 				566B64731FAB173300625364 /* AnimatedImage.swift in Sources */,
 				848783EA1DEDDF4A00BB7787 /* MusubiGridViewCell.swift in Sources */,
+				56B91D9E1FB1AA9C00B3512A /* BeautifulGridLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
