@@ -12,11 +12,11 @@
 - Portrait, Landscape
 - iPhone X compatible
 
-![select](https://user-images.githubusercontent.com/10028587/32550578-fb3e5e20-c4d0-11e7-9366-c71d116dd46c.png)
-
 ![anim](https://raw.githubusercontent.com/ha1fha1f/MusubiImagePicker/master/screenshots/anim.gif)
 
-![albam](https://user-images.githubusercontent.com/10028587/32550521-cc4b91a0-c4d0-11e7-9fba-49405fbad162.png)
+|Select image|Choose albam|
+|:-:|:-:|
+|![select](https://user-images.githubusercontent.com/10028587/32550578-fb3e5e20-c4d0-11e7-9366-c71d116dd46c.png)|![albam](https://user-images.githubusercontent.com/10028587/32550521-cc4b91a0-c4d0-11e7-9fba-49405fbad162.png)|
 
 ![landscape](https://user-images.githubusercontent.com/10028587/32550405-5c0950bc-c4d0-11e7-8837-ccdb38384481.png)
 
