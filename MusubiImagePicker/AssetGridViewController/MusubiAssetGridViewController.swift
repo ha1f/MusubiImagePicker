@@ -54,7 +54,8 @@ class MusubiAssetGridViewController: AssetGridViewController {
     }
     
     private func _layoutGrid() {
-        collectionView?.adaptBeautifulGrid(numberOfGridsPerRow: 3, gridLineSpace: 1)
+        let numberOfGridsPerRow = Int(round(view.frame.width / 120))
+        collectionView?.adaptBeautifulGrid(numberOfGridsPerRow: numberOfGridsPerRow, gridLineSpace: 1)
     }
     
     override func viewDidLayoutSubviews() {

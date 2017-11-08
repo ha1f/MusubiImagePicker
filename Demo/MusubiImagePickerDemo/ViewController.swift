@@ -47,6 +47,7 @@ class ViewController: UIViewController {
 extension ViewController: MusubiImagePickerDelegate {
     func musubiImagePicker(didFinishPickingAssetsIn picker: MusubiImagePickerViewController, assets: [String]) {
         print("finish", assets)
+        
     }
     
     func musubiImagePicker(didCancelPickingAssetsIn picker: MusubiImagePickerViewController) {

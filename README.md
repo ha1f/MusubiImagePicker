@@ -9,10 +9,16 @@
 - 選択順を保持
 - 少しながらアニメーション
 - プレビュー機能（長押しでプレビュー）
+- Portrait, Landscape
+- iPhone X compatible
 
-![select](https://raw.githubusercontent.com/ha1fha1f/MusubiImagePicker/master/screenshots/select.png)
+![select](https://user-images.githubusercontent.com/10028587/32550578-fb3e5e20-c4d0-11e7-9366-c71d116dd46c.png)
 
 ![anim](https://raw.githubusercontent.com/ha1fha1f/MusubiImagePicker/master/screenshots/anim.gif)
+
+![albam](https://user-images.githubusercontent.com/10028587/32550521-cc4b91a0-c4d0-11e7-9fba-49405fbad162.png)
+
+![landscape](https://user-images.githubusercontent.com/10028587/32550405-5c0950bc-c4d0-11e7-8837-ccdb38384481.png)
 
 ## GettingStarted
 
@@ -47,7 +53,7 @@ class ViewController: UIViewController, MusubiImagePickerDelegate {
         var config = MusubiImagePickerConfiguration()
         config.maxSelectionsCount = 3
         config.previouslySelectedAssetLocalIdentifiers = ["ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED/L0/001"]
-        MusubiImagePicker.show(from: self, config: config, delegate: self)
+        MusubiImagePicker.present(from: self, config: config, delegate: self)
     }
 }
 
@@ -56,10 +62,56 @@ extension ViewController: MusubiImagePickerDelegate {
     func musubiImagePicker(didFinishPickingAssetsIn picker: MusubiImagePickerViewController, assets: [String]) {
         print("finish", assets)
     }
-    
+
     // キャンセルされた時
     func musubiImagePicker(didCancelPickingAssetsIn picker: MusubiImagePickerViewController) {
         print("cancel")
+    }
+}
+```
+
+既に存在するUINavigationControllerを使ってpushすることもできます。
+
+```swift
+import UIKit
+import MusubiImagePicker
+import Photos
+
+class MiddleViewController: UIViewController {
+
+    weak var delegate: MusubiImagePickerDelegate!
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        var config = MusubiImagePickerConfiguration()
+        config.maxSelectionsCount = 3
+        config.previouslySelectedAssetLocalIdentifiers = []
+        MusubiImagePicker.show(from: self, config: config, delegate: delegate)
+    }
+}
+
+class ViewController: UIViewController {
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        let vc = MiddleViewController()
+        vc.delegate = self
+        let navigation = UINavigationController(rootViewController: vc)
+        self.present(navigation, animated: true, completion: nil)
+    }
+}
+
+extension ViewController: MusubiImagePickerDelegate {
+    func musubiImagePicker(didFinishPickingAssetsIn picker: MusubiImagePickerViewController, assets: [String]) {
+        print("finish", assets)
+        self.navigationController?.popToViewController(self, animated: true)
+    }
+
+    func musubiImagePicker(didCancelPickingAssetsIn picker: MusubiImagePickerViewController) {
+        print("cancel")
+        self.navigationController?.popToViewController(self, animated: true)
     }
 }
 ```
@@ -77,7 +129,6 @@ iOS 10.0, or later
 - delegateのinterfaceの修正
 - headerCells、を作って、カメラ等を追加できるようにする
 - 現状ほぼ改変できないので改変可能にしたい
-- iOS 9.xへの対応
 
 ## release手順
 
