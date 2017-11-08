@@ -53,9 +53,13 @@ class MusubiAssetGridViewController: AssetGridViewController {
         }
     }
     
+    private func _layoutGrid() {
+        collectionView?.adaptBeautifulGrid(numberOfGridsPerRow: 3, gridLineSpace: 1)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collectionView?.adaptBeautifulGrid(numberOfGridsPerRow: 3, gridLineSpace: 1)
+        _layoutGrid()
     }
     
     func setResultAllPhotos() {

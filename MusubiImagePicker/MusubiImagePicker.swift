@@ -11,14 +11,18 @@ import Photos
 
 public protocol MusubiImagePickerDelegate: class {
     func musubiImagePicker(didFinishPickingAssetsIn picker: MusubiImagePickerViewController, assets: [String])
+    func musubiImagePicker(didSelectedAssetsUpdatedIn picker: MusubiImagePickerViewController, newSelection: [String], oldSelection: [String])
     func musubiImagePicker(didCancelPickingAssetsIn picker: MusubiImagePickerViewController)
 }
 
-extension MusubiImagePickerDelegate {
+public extension MusubiImagePickerDelegate {
     func musubiImagePicker(didFinishPickingAssetsIn picker: MusubiImagePickerViewController, assets: [String]) {
         
     }
     func musubiImagePicker(didCancelPickingAssetsIn picker: MusubiImagePickerViewController) {
+        
+    }
+    func musubiImagePicker(didSelectedAssetsUpdatedIn picker: MusubiImagePickerViewController, newSelection: [String], oldSelection: [String]) {
         
     }
 }

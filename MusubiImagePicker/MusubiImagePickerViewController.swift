@@ -53,6 +53,7 @@ public class MusubiImagePickerViewController: UIViewController {
         didSet {
             deselectBarButtonItem.isEnabled = !selectedLocalIdentifiers.isEmpty
             updateTitle()
+            delegate?.musubiImagePicker(didSelectedAssetsUpdatedIn: self, newSelection: selectedLocalIdentifiers, oldSelection: oldValue)
         }
     }
     
@@ -154,10 +155,19 @@ public class MusubiImagePickerViewController: UIViewController {
     }
     
     private func dismissIfPresented() {
-        // TODO: NavigationController使ってたらpopする
         if hasShownAsModal {
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    private func finishPickingWithResult() {
+        delegate?.musubiImagePicker(didFinishPickingAssetsIn: self, assets: selectedLocalIdentifiers)
+        dismissIfPresented()
+    }
+    
+    private func cancelPicking() {
+        delegate?.musubiImagePicker(didCancelPickingAssetsIn: self)
+        dismissIfPresented()
     }
     
     @objc
@@ -174,14 +184,12 @@ public class MusubiImagePickerViewController: UIViewController {
     
     @objc
     func onDonePickingAssets() {
-        delegate?.musubiImagePicker(didFinishPickingAssetsIn: self, assets: selectedLocalIdentifiers)
-        dismissIfPresented()
+        finishPickingWithResult()
     }
     
     @objc
     func onCancelPickingAssets() {
-        delegate?.musubiImagePicker(didCancelPickingAssetsIn: self)
-        dismissIfPresented()
+        cancelPicking()
     }
 }
 
@@ -196,9 +204,14 @@ extension MusubiImagePickerViewController: MusubiAssetGridViewControllerDelegate
     }
     func assetGridViewController(didSelectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
         selectedLocalIdentifiers.append(asset.localIdentifier)
+        
+        // 1つなら自動的に戻る
+        if config.maxSelectionsCount == 1 {
+            finishPickingWithResult()
+        }
     }
     func assetGridViewController(didDeselectCellAt indexPath: IndexPath, asset: PHAsset, collection: PHAssetCollection?) {
-        if let removeIndex = selectedLocalIdentifiers.index(where: { $0 == asset.localIdentifier  }) {
+        if let removeIndex = selectedLocalIdentifiers.index(where: { $0 == asset.localIdentifier }) {
             selectedLocalIdentifiers.remove(at: removeIndex)
         }
     }
