@@ -161,7 +161,7 @@ public class MusubiImagePickerViewController: UIViewController {
     }
     
     private func finishPickingWithResult() {
-        delegate?.musubiImagePicker(didFinishPickingAssetsIn: self, assets: selectedLocalIdentifiers)
+        delegate?.musubiImagePicker(didFinishPickingAssetsIn: self, assets: selectedLocalIdentifiers.prefix(config.maxSelectionsCount).map { $0 })
         dismissIfPresented()
     }
     
