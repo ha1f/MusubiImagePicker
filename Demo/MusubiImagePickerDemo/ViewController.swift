@@ -10,7 +10,9 @@ import UIKit
 import MusubiImagePicker
 import Photos
 
-class ViewController: UIViewController {
+class MiddleViewController: UIViewController {
+    
+    weak var delegate: MusubiImagePickerDelegate!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -18,7 +20,27 @@ class ViewController: UIViewController {
         var config = MusubiImagePickerConfiguration()
         config.maxSelectionsCount = 3
         config.previouslySelectedAssetLocalIdentifiers = ["ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED/L0/001"]
-        MusubiImagePicker.show(from: self, config: config, delegate: self)
+        MusubiImagePicker.show(from: self, config: config, delegate: delegate)
+    }
+}
+
+class ViewController: UIViewController {
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // navigation
+        let vc = MiddleViewController()
+        vc.delegate = self
+        let navigation = UINavigationController(rootViewController: vc)
+        self.present(navigation, animated: true, completion: nil)
+        
+//        // modal
+//        var config = MusubiImagePickerConfiguration()
+//        config.maxSelectionsCount = 3
+//        config.previouslySelectedAssetLocalIdentifiers = ["ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED/L0/001"]
+//        MusubiImagePicker.present(from: self, config: config, delegate: self)
+        
     }
 }
 

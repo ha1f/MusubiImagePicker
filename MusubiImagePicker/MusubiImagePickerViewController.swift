@@ -62,14 +62,20 @@ public class MusubiImagePickerViewController: UIViewController {
         }
     }
     
+    private lazy var titleView: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.numberOfLines = 2
+        button.setTitle(self.title, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.sizeToFit()
+        button.addTarget(self, action: #selector(self.onTappedTitle), for: .touchUpInside)
+        return button
+    }()
+    
     override public var title: String? {
         didSet {
-            guard let label = navigationItem.titleView as? UILabel else {
-                return
-            }
-            label.numberOfLines = 2
-            label.text = title
-            label.sizeToFit()
+            titleView.setTitle(self.title, for: .normal)
+            titleView.sizeToFit()
         }
     }
     
@@ -93,12 +99,16 @@ public class MusubiImagePickerViewController: UIViewController {
         return self.childViewControllers.flatMap { $0 as? MusubiSelectAlbamViewController }.first
     }
     
+    var hasShownAsModal: Bool {
+        return self.navigationController?.viewControllers.first == self
+    }
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         selectedLocalIdentifiers = config.previouslySelectedAssetLocalIdentifiers
         
-        setupTitleLabel()
+        navigationItem.titleView = titleView
         isSelectAlbamViewHidden = true
         selectAlbamViewController?.delegate = self
         
@@ -115,17 +125,20 @@ public class MusubiImagePickerViewController: UIViewController {
         doneBarButtonItem.target = self
         doneBarButtonItem.action = #selector(self.onDonePickingAssets)
         navigationItem.rightBarButtonItem = doneBarButtonItem
-        
-        // CANCEL
-        cancelBarButtonItem.target = self
-        cancelBarButtonItem.action = #selector(self.onCancelPickingAssets)
-        
+
         // DeselectAll
         deselectBarButtonItem.target = self
         deselectBarButtonItem.action = #selector(self.onDeselectAll)
-        navigationItem.leftBarButtonItems = [
-            cancelBarButtonItem, deselectBarButtonItem
-        ]
+        
+        if hasShownAsModal {
+            // CANCEL
+            cancelBarButtonItem.target = self
+            cancelBarButtonItem.action = #selector(self.onCancelPickingAssets)
+            navigationItem.leftBarButtonItems = [cancelBarButtonItem, deselectBarButtonItem]
+        } else {
+            navigationItem.leftBarButtonItems = [deselectBarButtonItem]
+        }
+        navigationItem.leftItemsSupplementBackButton = true
         
         navigationController?.isToolbarHidden = true
     }
@@ -140,18 +153,15 @@ public class MusubiImagePickerViewController: UIViewController {
         }
     }
     
-    private func setupTitleLabel() {
-        let label = UILabel()
-        label.text = self.title
-        label.isUserInteractionEnabled = true
-        label.sizeToFit()
-        let titleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onTappedTitle(_:)))
-        label.addGestureRecognizer(titleTapGestureRecognizer)
-        navigationItem.titleView = label
+    private func dismissIfPresented() {
+        // TODO: NavigationController使ってたらpopする
+        if hasShownAsModal {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc
-    func onTappedTitle(_ recognizer: UIGestureRecognizer) {
+    func onTappedTitle() {
         isSelectAlbamViewHidden = !isSelectAlbamViewHidden
         updateTitle()
     }
@@ -165,13 +175,13 @@ public class MusubiImagePickerViewController: UIViewController {
     @objc
     func onDonePickingAssets() {
         delegate?.musubiImagePicker(didFinishPickingAssetsIn: self, assets: selectedLocalIdentifiers)
-        self.dismiss(animated: true, completion: nil)
+        dismissIfPresented()
     }
     
     @objc
     func onCancelPickingAssets() {
         delegate?.musubiImagePicker(didCancelPickingAssetsIn: self)
-        self.dismiss(animated: true, completion: nil)
+        dismissIfPresented()
     }
 }
 

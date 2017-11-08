@@ -88,6 +88,7 @@ public class MusubiImagePicker {
                     return
                 }
                 let nav = UINavigationController(rootViewController: picker)
+                nav.navigationBar.isTranslucent = false
                 viewController.show(nav, sender: nil)
             }
         }
