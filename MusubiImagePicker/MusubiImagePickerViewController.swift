@@ -93,11 +93,15 @@ public class MusubiImagePickerViewController: UIViewController {
     }
     
     var assetGridViewController: MusubiAssetGridViewController? {
-        return self.childViewControllers.flatMap { $0 as? MusubiAssetGridViewController }.first
+        return self.childViewControllers
+            .compactMap { $0 as? MusubiAssetGridViewController }
+            .first
     }
     
     var selectAlbamViewController: MusubiSelectAlbamViewController? {
-        return self.childViewControllers.flatMap { $0 as? MusubiSelectAlbamViewController }.first
+        return self.childViewControllers
+            .compactMap { $0 as? MusubiSelectAlbamViewController }
+            .first
     }
     
     var hasShownAsModal: Bool {
